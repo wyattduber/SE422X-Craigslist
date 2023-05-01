@@ -11,8 +11,7 @@ import re
 
 from sections.config import DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_NAME
 
-# Cars/Trucks
-@app.route('/carTruck', methods=['GET'])
+@app.route('/golf-carts', methods=['GET'])
 def carTruck():
     msg = ''
     inSession = None
@@ -27,13 +26,13 @@ def carTruck():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.CarTruckData;")
+    cursor.execute("SELECT * FROM DB_NAME.GolfCartData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
         carTruck = {}
-        carTruck['CarTruckID'] = item[0]
+        carTruck['GolfCartID'] = item[0]
         carTruck['CreationTime'] = item[1]
         carTruck['Price'] = item[2]
         carTruck['Location'] = item[3]
@@ -71,7 +70,7 @@ def carTruck():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.CarTruckData (creation_time, price, location, phoneNum, curr_condition, make_model, year_built, color, fuel_type) VALUES (" +\
+            statement = "INSERT INTO DB_NAME.GolfCartData (creation_time, price, location, phoneNum, curr_condition, make_model, year_built, color, fuel_type) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         price+"', '" +\
                         location+"', '" +\
@@ -86,11 +85,11 @@ def carTruck():
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
-            return redirect('/carTruck')
+            return redirect('/golf-carts')
     else:
         msg = 'You can only view these options. Sign up or Login if you want to upload items!'
 
-    return render_template('/forSale/carTruck.html', inSession=inSession, carTrucks=items, msg=msg)
+    return render_template('/forSale/golf-carts.html', inSession=inSession, carTrucks=items, msg=msg)
 
 @app.route('/bikes', methods=['GET', 'POST'])
 def bikes():
