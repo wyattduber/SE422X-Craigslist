@@ -23,7 +23,7 @@ def activities():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.ActivitiesData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.ActivitiesData;")
     results = cursor.fetchall()
 
     items = []
@@ -62,7 +62,7 @@ def activities():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.ActivitiesData (creation_time, location, phone_num, age_group, time_date, title) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.ActivitiesData (creation_time, location, phone_num, age_group, time_date, title) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\
@@ -96,7 +96,7 @@ def musicians():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.MusiciansData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.MusiciansData;")
     results = cursor.fetchall()
 
     items = []
@@ -133,7 +133,7 @@ def musicians():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.MusiciansData (creation_time, location, phone_num, musician_name, genre) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.MusiciansData (creation_time, location, phone_num, musician_name, genre) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\
@@ -166,7 +166,7 @@ def childcare():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.ChildCareData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.ChildCareData;")
     results = cursor.fetchall()
 
     items = []
@@ -205,7 +205,7 @@ def childcare():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.ChildCareData (creation_time, location, phone_num, open_hours, cost, childcare_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.ChildCareData (creation_time, location, phone_num, open_hours, cost, childcare_name) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\
@@ -240,7 +240,7 @@ def events():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.EventsData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.EventsData;")
     results = cursor.fetchall()
 
     items = []
@@ -279,7 +279,7 @@ def events():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.EventsData (creation_time, location, phone_num, date_time, entrance_fee, event_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.EventsData (creation_time, location, phone_num, date_time, entrance_fee, event_name) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\
@@ -314,7 +314,7 @@ def groups():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.GroupsData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.GroupsData;")
     results = cursor.fetchall()
 
     items = []
@@ -353,7 +353,7 @@ def groups():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.GroupsData (creation_time, location, phone_num, session_hours, cost, group_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.GroupsData (creation_time, location, phone_num, session_hours, cost, group_name) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\

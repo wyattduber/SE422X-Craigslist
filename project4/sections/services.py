@@ -26,7 +26,7 @@ def automotive():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.AutomotiveData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.AutomotiveData;")
     results = cursor.fetchall()
 
     items = []
@@ -66,7 +66,7 @@ def automotive():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.AutomotiveData (creation_time, location, phone_num, cost, operating_hours, duration, reservation) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.AutomotiveData (creation_time, location, phone_num, cost, operating_hours, duration, reservation) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -101,7 +101,7 @@ def computer():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.ComputerData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.ComputerData;")
     results = cursor.fetchall()
 
     items = []
@@ -139,7 +139,7 @@ def computer():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.ComputerData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.ComputerData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -172,7 +172,7 @@ def movingLabor():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.MovingLaborData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.MovingLaborData;")
     results = cursor.fetchall()
 
     items = []
@@ -210,7 +210,7 @@ def movingLabor():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.MovingLaborData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.MovingLaborData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -244,7 +244,7 @@ def legal():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.LegalData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.LegalData;")
     results = cursor.fetchall()
 
     items = []
@@ -282,7 +282,7 @@ def legal():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.LegalData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.LegalData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -316,7 +316,7 @@ def farm():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.FarmData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.FarmData;")
     results = cursor.fetchall()
 
     items = []
@@ -354,7 +354,7 @@ def farm():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.FarmData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.FarmData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\

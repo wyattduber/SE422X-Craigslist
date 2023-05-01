@@ -26,7 +26,7 @@ def apartments():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.ApartmentData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.ApartmentData;")
     results = cursor.fetchall()
 
     items = []
@@ -66,7 +66,7 @@ def apartments():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.ApartmentData (creation_time, location, phone_num, rent, square_feet, num_bathrooms, num_bedrooms) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.ApartmentData (creation_time, location, phone_num, rent, square_feet, num_bathrooms, num_bedrooms) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -102,7 +102,7 @@ def offices():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.OfficesData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.OfficesData;")
     results = cursor.fetchall()
 
     items = []
@@ -140,7 +140,7 @@ def offices():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.OfficesData (creation_time, location, phone_num, rent, square_feet, num_rooms) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.OfficesData (creation_time, location, phone_num, rent, square_feet, num_rooms) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -174,7 +174,7 @@ def rooms():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.RoomsData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.RoomsData;")
     results = cursor.fetchall()
 
     items = []
@@ -210,7 +210,7 @@ def rooms():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.RoomsData (creation_time, location, phone_num, rent, square_feet) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.RoomsData (creation_time, location, phone_num, rent, square_feet) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -242,7 +242,7 @@ def realEstate():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.RealEstateData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.RealEstateData;")
     results = cursor.fetchall()
 
     items = []
@@ -282,7 +282,7 @@ def realEstate():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.RealEstateData (creation_time, location, phone_num, cost, square_feet, num_bathrooms, num_bedrooms) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.RealEstateData (creation_time, location, phone_num, cost, square_feet, num_bathrooms, num_bedrooms) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -317,7 +317,7 @@ def vacation():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.VacationData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.VacationData;")
     results = cursor.fetchall()
 
     items = []
@@ -353,7 +353,7 @@ def vacation():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.VacationData (creation_time, location, phone_num, cost_per_night, num_beds) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.VacationData (creation_time, location, phone_num, cost_per_night, num_beds) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\

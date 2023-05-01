@@ -15,7 +15,7 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/sales">For Sale</a></li>
+                <li><a href="/for-sale">For Sale</a></li>
                 <li><a href="/housing">Housing</a></li>
                 <li><a href="/services">Services</a></li>
                 <li><a href="/jobs">Jobs</a></li>
@@ -47,7 +47,7 @@
             <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload an apartment have open for rent by clicking here.</u></p>
             <div id="showMe" class="modal">
   
-            <form class="modal-content animate" action="{{url_for('apartments')}}" method="post">
+            <form class="modal-content animate" action="{{url}}" method="post">
                 <div class="container">
                 <input type="text" placeholder="Rent" name="rent" value={{request.form.rent}} > <br>
                 <input type="text" placeholder="Location" name="location" value={{request.form.location}} > <br>

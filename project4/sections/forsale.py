@@ -11,7 +11,7 @@ import re
 
 from sections.config import DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_NAME
 
-@app.route('/golf-carts', methods=['GET'])
+@app.route('/golfCarts', methods=['GET', 'POST'])
 def carTruck():
     msg = ''
     inSession = None
@@ -26,7 +26,7 @@ def carTruck():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.GolfCartData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.GolfCartData;")
     results = cursor.fetchall()
 
     items = []
@@ -70,7 +70,7 @@ def carTruck():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.GolfCartData (creation_time, price, location, phoneNum, curr_condition, make_model, year_built, color, fuel_type) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.GolfCartData (creation_time, price, location, phoneNum, curr_condition, make_model, year_built, color, fuel_type) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         price+"', '" +\
                         location+"', '" +\
@@ -85,11 +85,11 @@ def carTruck():
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
-            return redirect('/golf-carts')
+            return redirect('/golfCarts')
     else:
         msg = 'You can only view these options. Sign up or Login if you want to upload items!'
 
-    return render_template('/forSale/golf-carts.html', inSession=inSession, carTrucks=items, msg=msg)
+    return render_template('/forSale/golfCarts.html', inSession=inSession, golfCarts=items, msg=msg)
 
 @app.route('/bikes', methods=['GET', 'POST'])
 def bikes():
@@ -106,7 +106,7 @@ def bikes():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.BikeData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.BikeData;")
     results = cursor.fetchall()
 
     items = []
@@ -144,7 +144,7 @@ def bikes():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.BikeData (creation_time, price, location, phoneNum, bike_type, color) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.BikeData (creation_time, price, location, phoneNum, bike_type, color) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         price+"', '" +\
                         location+"', '" +\
@@ -179,7 +179,7 @@ def boats():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.BoatData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.BoatData;")
     results = cursor.fetchall()
 
     items = []
@@ -221,7 +221,7 @@ def boats():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.BoatData (creation_time, price, location, phoneNum, boat_length, make_model, year_built, boat_type) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.BoatData (creation_time, price, location, phoneNum, boat_length, make_model, year_built, boat_type) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         price+"', '" +\
                         location+"', '" +\
@@ -242,7 +242,7 @@ def boats():
     return render_template('/forSale/boats.html', inSession=inSession, boats=items, msg=msg)
 
 
-@app.route('/books', methods=['GET', 'POST'])
+@app.route('/cell-phones', methods=['GET', 'POST'])
 def books():
     msg = ''
     inSession = None
@@ -257,20 +257,20 @@ def books():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.BookData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.CellPhoneData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
         book = {}
-        book['BookID'] = item[0]
+        book['CellPhoneID'] = item[0]
         book['CreationTime'] = item[1]
         book['Price'] = item[2]
         book['Location'] = item[3]
         book['PhoneNum'] = item[4]
-        book['Author'] = item[5]
-        book['BookType'] = item[6]
-        book['Title'] = item[7]
+        book['Manufacturer'] = item[5]
+        book['Model'] = item[6]
+        book['Memory'] = item[7]
         items.append(book)
     conn.close()
     print(items)
@@ -279,11 +279,11 @@ def books():
         price = request.form['price']
         location = request.form['location']
         phoneNum = request.form['phoneNum']
-        author = request.form['author']
-        book_type = request.form['bookType']
-        title = request.form['title']
+        manufacturer = request.form['manufacturer']
+        model = request.form['model']
+        memory = request.form['memory']
 
-        if price == '' or location == '' or phoneNum == '' or author == '' or book_type == '' or title == '':
+        if price == '' or location == '' or phoneNum == '' or manufacturer == '' or model == '' or memory == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -297,24 +297,24 @@ def books():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.BookData (creation_time, price, location, phoneNum, author, book_type, title) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.CellPhoneData (creation_time, price, location, phoneNum, manufacturer, model, memory) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         price+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
-                        author+"', '" +\
-                        book_type+"', '" +\
-                        title+"');"
+                        manufacturer+"', '" +\
+                        model+"', '" +\
+                        memory+"');"
 
             print(statement)
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
 
-            return redirect('/books')
+            return redirect('/cell-phones')
     else:
         msg = 'You can only view these options. Sign up or Login if you want to upload items!'
-    return render_template('/forSale/books.html', inSession=inSession, books=items, msg=msg)
+    return render_template('/forSale/cellphones.html', inSession=inSession, cellPhones=items, msg=msg)
 
 
 @app.route('/furniture', methods=['GET', 'POST'])
@@ -332,7 +332,7 @@ def furniture():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.FurnitureData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.FurnitureData;")
     results = cursor.fetchall()
 
     items = []
@@ -370,7 +370,7 @@ def furniture():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.FurnitureData (creation_time, price, location, phone_num, brand, furniture_type) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.FurnitureData (creation_time, price, location, phone_num, brand, furniture_type) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         price+"', '" +\
                         location+"', '" +\

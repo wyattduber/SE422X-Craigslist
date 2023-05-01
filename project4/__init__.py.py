@@ -81,7 +81,7 @@ def signup():
             signupMsg = 'Passwords do not match!'
         else:
             cursor.execute(
-                "INSERT INTO DB_NAME.UserData (username, password) VALUES (%s,%s)", (username, password))
+                f"INSERT INTO {DB_NAME}.UserData (username, password) VALUES (%s,%s)", (username, password))
             conn.commit()
             conn.close()
             signupMsg = 'Signed up successfully!'
@@ -183,7 +183,7 @@ def boats():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.BoatData (creation_time, price, location, phoneNum, boat_length, make_model, year_built, boat_type) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.BoatData (creation_time, price, location, phoneNum, boat_length, make_model, year_built, boat_type) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         price+"', '" +\
                         location+"', '" +\
@@ -260,7 +260,7 @@ def books():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.BookData (creation_time, price, location, phoneNum, author, book_type, title) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.BookData (creation_time, price, location, phoneNum, author, book_type, title) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         price+"', '" +\
                         location+"', '" +\
@@ -333,7 +333,7 @@ def furniture():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.FurnitureData (creation_time, price, location, phone_num, brand, furniture_type) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.FurnitureData (creation_time, price, location, phone_num, brand, furniture_type) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         price+"', '" +\
                         location+"', '" +\
@@ -406,7 +406,7 @@ def bikes():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.BikeData (creation_time, price, location, phoneNum, bike_type, color) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.BikeData (creation_time, price, location, phoneNum, bike_type, color) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         price+"', '" +\
                         location+"', '" +\
@@ -485,7 +485,7 @@ def apartments():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.ApartmentData (creation_time, location, phone_num, rent, square_feet, num_bathrooms, num_bedrooms) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.ApartmentData (creation_time, location, phone_num, rent, square_feet, num_bathrooms, num_bedrooms) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -559,7 +559,7 @@ def offices():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.OfficesData (creation_time, location, phone_num, rent, square_feet, num_rooms) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.OfficesData (creation_time, location, phone_num, rent, square_feet, num_rooms) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -634,7 +634,7 @@ def realEstate():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.RealEstateData (creation_time, location, phone_num, cost, square_feet, num_bathrooms, num_bedrooms) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.RealEstateData (creation_time, location, phone_num, cost, square_feet, num_bathrooms, num_bedrooms) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -706,7 +706,7 @@ def rooms():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.RoomsData (creation_time, location, phone_num, rent, square_feet) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.RoomsData (creation_time, location, phone_num, rent, square_feet) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -775,7 +775,7 @@ def vacation():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.VacationData (creation_time, location, phone_num, cost_per_night, num_beds) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.VacationData (creation_time, location, phone_num, cost_per_night, num_beds) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -851,7 +851,7 @@ def automotive():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.AutomotiveData (creation_time, location, phone_num, cost, operating_hours, duration, reservation) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.AutomotiveData (creation_time, location, phone_num, cost, operating_hours, duration, reservation) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -924,7 +924,7 @@ def computer():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.ComputerData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.ComputerData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -996,7 +996,7 @@ def legal():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.LegalData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.LegalData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -1069,7 +1069,7 @@ def movingLabor():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.MovingLaborData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.MovingLaborData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -1142,7 +1142,7 @@ def farm():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.FarmData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.FarmData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -1221,7 +1221,7 @@ def accounting():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.AccountingData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.AccountingData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -1300,7 +1300,7 @@ def education():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.EducationData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.EducationData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -1379,7 +1379,7 @@ def engineering():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.EngineeringData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.EngineeringData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -1458,7 +1458,7 @@ def labor():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.LaborData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.LaborData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -1537,7 +1537,7 @@ def retail():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.RetailData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.RetailData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -1615,7 +1615,7 @@ def activities():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.ActivitiesData (creation_time, location, phone_num, age_group, time_date, title) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.ActivitiesData (creation_time, location, phone_num, age_group, time_date, title) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\
@@ -1689,7 +1689,7 @@ def childcare():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.ChildCareData (creation_time, location, phone_num, open_hours, cost, childcare_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.ChildCareData (creation_time, location, phone_num, open_hours, cost, childcare_name) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\
@@ -1763,7 +1763,7 @@ def events():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.EventsData (creation_time, location, phone_num, date_time, entrance_fee, event_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.EventsData (creation_time, location, phone_num, date_time, entrance_fee, event_name) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\
@@ -1837,7 +1837,7 @@ def groups():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.GroupsData (creation_time, location, phone_num, session_hours, cost, group_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.GroupsData (creation_time, location, phone_num, session_hours, cost, group_name) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\
@@ -1909,7 +1909,7 @@ def musicians():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.MusiciansData (creation_time, location, phone_num, musician_name, genre) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.MusiciansData (creation_time, location, phone_num, musician_name, genre) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\

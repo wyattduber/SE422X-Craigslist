@@ -15,7 +15,7 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/sales">For Sale</a></li>
+                <li><a href="/for-sale">For Sale</a></li>
                 <li><a href="/housing">Housing</a></li>
                 <li><a href="/services">Services</a></li>
                 <li><a href="/jobs">Jobs</a></li>
@@ -24,42 +24,39 @@
         </nav>
     <main>
         <div>
-            <h2>Golf Carts</h2>
+            <h2>Finance</h2>
             {% if msg %}
                 <p>{{ msg }}</p>
             {% endif %}
 
-            {% for c in golf-carts %}
-            <div> 
-                <h4>{{c.MakeModel}}</h4>
+            {% for f in finance %}
+            <div>
+                <h4>{{f.Title}}</h4>
                 <ul>
-                  <li>Uploaded: {{c.CreationTime}}</li>
-                  <li>Price: {{c.Price}}</li>
-                  <li>Location: {{c.Location}}</li>
-                  <li>Contact Information: {{c.PhoneNum}}</li>
-                  <li>Miles: {{c.CurrCondition}}</li>
-                  <li>Make/Model: {{c.MakeModel}}</li>
-                  <li>Year: {{c.YearBuilt}}</li>
-                  <li>Color: {{c.Color}}</li>
-                  <li>Fuel Type: {{c.FuelType}}</li>
+                  <li>Uploaded: {{f.CreationTime}}</li>
+                  <li>Employer: {{f.Employer}}</li>
+                  <li>Experience Needed: {{f.Experience}}</li>
+                  <li>Salary: {{f.Salary}}</li>
+                  <li>Location: {{f.Location}}</li>
+                  <li>Contact Information: {{f.Email}}</li>
+                  <li>Work Options: {{f.RemotePerson}}</li>                  
                 </ul>
             </div>
             {% endfor %}
 
             {% if inSession %}
-            <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload a golf cart you have for sale by clicking here.</u></p>
+            <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload a finance related job opening by clicking here.</u></p>
             <div id="showMe" class="modal">
 
-            <form class="modal-content animate" action="{{url_for('golf-carts')}}" method="post">
+            <form class="modal-content animate" action="{{url}}" method="post">
                 <div class="container">
-                <input type="text" placeholder="Price" name="price" value={{request.form.price}} > <br>
+                <input type="text" placeholder="Experience Needed" name="experience" value={{request.form.experience}} > <br>
+                <input type="text" placeholder="Salary" name="salary" value={{request.form.resersalaryvation}} > <br>
                 <input type="text" placeholder="Location" name="location" value={{request.form.location}} > <br>
-                <input type="text" placeholder="Phone Number" name="phoneNum" value={{request.form.phoneNum}} > <br>
-                <input type="text" placeholder="Miles" name="condition" value={{request.form.condition}} > <br>
-                <input type="text" placeholder="Make/Model" name="make_model" value={{request.form.make_model}} > <br>
-                <input type="text" placeholder="Year" name="year_built" value={{request.form.year_built}} > <br>
-                <input type="text" placeholder="Color" name="color" value={{request.form.color}} > <br>
-                <input type="text" placeholder="Fuel Type" name="fuel_type" value={{request.form.fuel_type}} > <br>
+                <input type="text" placeholder="Email" name="eamil" value={{request.form.email}} > <br>
+                <input type="text" placeholder="Work Options" name="remote_person" value={{request.form.remote_person}} > <br>
+                <input type="text" placeholder="Title" name="title" value={{request.form.title}} > <br>
+                <input type="text" placeholder="Employer" name="employer" value={{request.form.employer}} > <br>
                 <input type="submit" value="Upload" style="width:60px">
                 <button type="button" onclick="document.getElementById('showMe').style.display='none'" class="cancelbtn">Cancel</button>
                 </div>

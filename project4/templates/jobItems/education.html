@@ -15,7 +15,7 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/sales">For Sale</a></li>
+                <li><a href="/for-sale">For Sale</a></li>
                 <li><a href="/housing">Housing</a></li>
                 <li><a href="/services">Services</a></li>
                 <li><a href="/jobs">Jobs</a></li>
@@ -48,7 +48,7 @@
             <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload an education related job opening by clicking here.</u></p>
             <div id="showMe" class="modal">
 
-            <form class="modal-content animate" action="{{url_for('education')}}" method="post">
+            <form class="modal-content animate" action="{{url}}" method="post">
                 <div class="container">
                 <input type="text" placeholder="Experience Needed" name="experience" value={{request.form.experience}} > <br>
                 <input type="text" placeholder="Salary" name="salary" value={{request.form.resersalaryvation}} > <br>

@@ -7,9 +7,9 @@ import MySQLdb
 import MySQLdb.cursors
 
 from sections.config import DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_NAME
-
-@app.route('/accounting', methods=['GET', 'POST'])
-def accounting():
+#healthcare, engineering, education, transportation, finance
+@app.route('/healthcare', methods=['GET', 'POST'])
+def healthcare():
     msg = ''
     inSession = None
     if 'loggedin' in session:
@@ -23,35 +23,33 @@ def accounting():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.AccountingData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.HealthcareData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
-        accounting = {}
-        accounting['AccountingID'] = item[0]
-        accounting['CreationTime'] = item[1]
-        accounting['Location'] = item[2]
-        accounting['PhoneNum'] = item[3]
-        accounting['Salary'] = item[4]
-        accounting['Experience'] = item[5]
-        accounting['RemotePerson'] = item[6]
-        accounting['Title'] = item[7]
-        accounting['CompanyName'] = item[8]
-        items.append(accounting)
+        healthcare = {}
+        healthcare['HealthcareID'] = item[0]
+        healthcare['CreationTime'] = item[1]
+        healthcare['Location'] = item[2]
+        healthcare['Email'] = item[3]
+        healthcare['Salary'] = item[4]
+        healthcare['Experience'] = item[5]
+        healthcare['Title'] = item[6]
+        healthcare['Employer'] = item[7]
+        items.append(healthcare)
     conn.close()
     print(items)
 
     if request.method == 'POST':
         salary = request.form['salary']
         location = request.form['location']
-        phoneNum = request.form['phoneNum']
+        email = request.form['email']
         experience = request.form['experience']
-        remote_person = request.form['remote_person']
         title = request.form['title']
-        company_name = request.form['company_name']
+        employer = request.form['employer']
 
-        if salary == '' or location == '' or phoneNum == '' or experience == '' or remote_person == '' or title == '' or company_name == '':
+        if salary == '' or location == '' or email == '' or experience == '' or title == '' or employer == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -65,26 +63,25 @@ def accounting():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.AccountingData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.HealthcareData (creation_time, location, email, salary, experience, title, employer) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
-                        phoneNum+"', '" +\
+                        email+"', '" +\
                         salary+"', '" +\
                         experience+"', '" +\
-                        remote_person+"', '" +\
                         title+"', '" +\
-                        company_name+"');"
+                        employer+"');"
 
             print(statement)
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
 
-            return redirect('/accounting')
+            return redirect('/healthcare')
     else:
         msg = 'Sign up or Login if you want to upload items!'
 
-    return render_template('/jobItems/accounting.html', inSession=inSession, accounting=items, msg=msg)
+    return render_template('/jobItems/healthcare.html', inSession=inSession, healthcare=items, msg=msg)
 
 @app.route('/engineering', methods=['GET', 'POST'])
 def engineering():
@@ -101,21 +98,20 @@ def engineering():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.EngineeringData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.EngineeringData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
         engineering = {}
-        engineering['AccountingID'] = item[0]
+        engineering['EngineeringID'] = item[0]
         engineering['CreationTime'] = item[1]
         engineering['Location'] = item[2]
-        engineering['PhoneNum'] = item[3]
+        engineering['Email'] = item[3]
         engineering['Salary'] = item[4]
         engineering['Experience'] = item[5]
-        engineering['RemotePerson'] = item[6]
-        engineering['Title'] = item[7]
-        engineering['CompanyName'] = item[8]
+        engineering['Title'] = item[6]
+        engineering['Employer'] = item[7]
         items.append(engineering)
     conn.close()
     print(items)
@@ -123,13 +119,12 @@ def engineering():
     if request.method == 'POST':
         salary = request.form['salary']
         location = request.form['location']
-        phoneNum = request.form['phoneNum']
+        email = request.form['email']
         experience = request.form['experience']
-        remote_person = request.form['remote_person']
         title = request.form['title']
-        company_name = request.form['company_name']
+        employer = request.form['employer']
 
-        if salary == '' or location == '' or phoneNum == '' or experience == '' or remote_person == '' or title == '' or company_name == '':
+        if salary == '' or location == '' or email == '' or experience == '' or title == '' or employer == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -143,15 +138,14 @@ def engineering():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.EngineeringData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.EngineeringData (creation_time, location, email, salary, experience, title, employer) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
-                        phoneNum+"', '" +\
+                        email+"', '" +\
                         salary+"', '" +\
                         experience+"', '" +\
-                        remote_person+"', '" +\
                         title+"', '" +\
-                        company_name+"');"
+                        employer+"');"
 
             print(statement)
             result = cursor.execute(statement)
@@ -179,21 +173,20 @@ def education():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.EducationData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.EducationData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
         education = {}
-        education['AccountingID'] = item[0]
+        education['EducationID'] = item[0]
         education['CreationTime'] = item[1]
         education['Location'] = item[2]
-        education['PhoneNum'] = item[3]
+        education['Email'] = item[3]
         education['Salary'] = item[4]
         education['Experience'] = item[5]
-        education['RemotePerson'] = item[6]
-        education['Title'] = item[7]
-        education['CompanyName'] = item[8]
+        education['Title'] = item[6]
+        education['Employer'] = item[7]
         items.append(education)
     conn.close()
     print(items)
@@ -201,13 +194,12 @@ def education():
     if request.method == 'POST':
         salary = request.form['salary']
         location = request.form['location']
-        phoneNum = request.form['phoneNum']
-        experience = request.form['experience']
-        remote_person = request.form['remote_person']
+        email = request.form['email']
+        experience = request.form['emxperience']
         title = request.form['title']
-        company_name = request.form['company_name']
+        employer = request.form['employer']
 
-        if salary == '' or location == '' or phoneNum == '' or experience == '' or remote_person == '' or title == '' or company_name == '':
+        if salary == '' or location == '' or email == '' or experience == '' or title == '' or employer == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -221,15 +213,14 @@ def education():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.EducationData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.EducationData (creation_time, location, email, salary, experience, title, employer) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
-                        phoneNum+"', '" +\
+                        email+"', '" +\
                         salary+"', '" +\
                         experience+"', '" +\
-                        remote_person+"', '" +\
                         title+"', '" +\
-                        company_name+"');"
+                        employer+"');"
 
             print(statement)
             result = cursor.execute(statement)
@@ -242,8 +233,8 @@ def education():
 
     return render_template('/jobItems/education.html', inSession=inSession, education=items, msg=msg)
 
-@app.route('/labor', methods=['GET', 'POST'])
-def labor():
+@app.route('/transportation', methods=['GET', 'POST'])
+def transportation():
     msg = ''
     inSession = None
     if 'loggedin' in session:
@@ -257,35 +248,33 @@ def labor():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.LaborData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.TransportationData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
-        labor = {}
-        labor['AccountingID'] = item[0]
-        labor['CreationTime'] = item[1]
-        labor['Location'] = item[2]
-        labor['PhoneNum'] = item[3]
-        labor['Salary'] = item[4]
-        labor['Experience'] = item[5]
-        labor['RemotePerson'] = item[6]
-        labor['Title'] = item[7]
-        labor['CompanyName'] = item[8]
-        items.append(labor)
+        transportation = {}
+        transportation['TransportationID'] = item[0]
+        transportation['CreationTime'] = item[1]
+        transportation['Location'] = item[2]
+        transportation['Email'] = item[3]
+        transportation['Salary'] = item[4]
+        transportation['Experience'] = item[5]
+        transportation['Title'] = item[6]
+        transportation['Employer'] = item[7]
+        items.append(transportation)
     conn.close()
     print(items)
 
     if request.method == 'POST':
         salary = request.form['salary']
         location = request.form['location']
-        phoneNum = request.form['phoneNum']
+        email = request.form['email']
         experience = request.form['experience']
-        remote_person = request.form['remote_person']
         title = request.form['title']
-        company_name = request.form['company_name']
+        employer = request.form['employer']
 
-        if salary == '' or location == '' or phoneNum == '' or experience == '' or remote_person == '' or title == '' or company_name == '':
+        if salary == '' or location == '' or email == '' or experience == '' or title == '' or employer == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -299,30 +288,29 @@ def labor():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.LaborData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.TransportationData (creation_time, location, email, salary, experience, title, employer) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
-                        phoneNum+"', '" +\
+                        email+"', '" +\
                         salary+"', '" +\
                         experience+"', '" +\
-                        remote_person+"', '" +\
                         title+"', '" +\
-                        company_name+"');"
+                        employer+"');"
 
             print(statement)
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
 
-            return redirect('/labor')
+            return redirect('/transportation')
     else:
         msg = 'Sign up or Login if you want to upload items!'
 
-    return render_template('/jobItems/labor.html', inSession=inSession, labor=items, msg=msg)
+    return render_template('/jobItems/transportation.html', inSession=inSession, transportation=items, msg=msg)
 
 
-@app.route('/retail', methods=['GET', 'POST'])
-def retail():
+@app.route('/finance', methods=['GET', 'POST'])
+def finance():
     msg = ''
     inSession = None
     if 'loggedin' in session:
@@ -336,35 +324,34 @@ def retail():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.RetailData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.FinanceData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
-        retail = {}
-        retail['AccountingID'] = item[0]
-        retail['CreationTime'] = item[1]
-        retail['Location'] = item[2]
-        retail['PhoneNum'] = item[3]
-        retail['Salary'] = item[4]
-        retail['Experience'] = item[5]
-        retail['RemotePerson'] = item[6]
-        retail['Title'] = item[7]
-        retail['CompanyName'] = item[8]
-        items.append(retail)
+        Finance = {}
+        Finance['FinanceID'] = item[0]
+        Finance['CreationTime'] = item[1]
+        Finance['Location'] = item[2]
+        Finance['Email'] = item[3]
+        Finance['Salary'] = item[4]
+        Finance['Experience'] = item[5]
+        Finance['Title'] = item[6]
+        Finance['Employer'] = item[7]
+        items.append(finance)
     conn.close()
     print(items)
 
     if request.method == 'POST':
         salary = request.form['salary']
         location = request.form['location']
-        phoneNum = request.form['phoneNum']
+        email = request.form['email']
         experience = request.form['experience']
         remote_person = request.form['remote_person']
         title = request.form['title']
-        company_name = request.form['company_name']
+        employer = request.form['employer']
 
-        if salary == '' or location == '' or phoneNum == '' or experience == '' or remote_person == '' or title == '' or company_name == '':
+        if salary == '' or location == '' or email == '' or experience == '' or title == '' or employer == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -378,23 +365,22 @@ def retail():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.RetailData (creation_time, location, phone_num, salary, experience, remote_person, title, company_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.FinanceData (creation_time, location, email, salary, experience, title, employer) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
-                        phoneNum+"', '" +\
+                        email+"', '" +\
                         salary+"', '" +\
                         experience+"', '" +\
-                        remote_person+"', '" +\
                         title+"', '" +\
-                        company_name+"');"
+                        employer+"');"
 
             print(statement)
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
 
-            return redirect('/retail')
+            return redirect('/finance')
     else:
         msg = 'Sign up or Login if you want to upload items!'
 
-    return render_template('/jobItems/retail.html', inSession=inSession, retail=items, msg=msg)
+    return render_template('/jobItems/finance.html', inSession=inSession, finance=items, msg=msg)
