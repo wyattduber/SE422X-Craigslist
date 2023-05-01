@@ -12,7 +12,7 @@ import re
 from sections.config import DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_NAME
 
 @app.route('/golfCarts', methods=['GET', 'POST'])
-def carTruck():
+def golfCarts():
     msg = ''
     inSession = None
     if 'loggedin' in session:
@@ -31,18 +31,18 @@ def carTruck():
 
     items = []
     for item in results:
-        carTruck = {}
-        carTruck['GolfCartID'] = item[0]
-        carTruck['CreationTime'] = item[1]
-        carTruck['Price'] = item[2]
-        carTruck['Location'] = item[3]
-        carTruck['PhoneNum'] = item[4]
-        carTruck['CurrCondition'] = item[5]
-        carTruck['MakeModel'] = item[6]
-        carTruck['YearBuilt'] = item[7]
-        carTruck['Color'] = item[8]
-        carTruck['FuelType'] = item[9]
-        items.append(carTruck)
+        golfCart = {}
+        golfCart['GolfCartID'] = item[0]
+        golfCart['CreationTime'] = item[1]
+        golfCart['Price'] = item[2]
+        golfCart['Location'] = item[3]
+        golfCart['PhoneNum'] = item[4]
+        golfCart['CurrCondition'] = item[5]
+        golfCart['MakeModel'] = item[6]
+        golfCart['YearBuilt'] = item[7]
+        golfCart['Color'] = item[8]
+        golfCart['FuelType'] = item[9]
+        items.append(golfCart)
     conn.close()
     print(items)
 
@@ -243,7 +243,7 @@ def boats():
 
 
 @app.route('/cell-phones', methods=['GET', 'POST'])
-def books():
+def cellPhones():
     msg = ''
     inSession = None
     if 'loggedin' in session:
@@ -262,16 +262,16 @@ def books():
 
     items = []
     for item in results:
-        book = {}
-        book['CellPhoneID'] = item[0]
-        book['CreationTime'] = item[1]
-        book['Price'] = item[2]
-        book['Location'] = item[3]
-        book['PhoneNum'] = item[4]
-        book['Manufacturer'] = item[5]
-        book['Model'] = item[6]
-        book['Memory'] = item[7]
-        items.append(book)
+        cellphone = {}
+        cellphone['CellPhoneID'] = item[0]
+        cellphone['CreationTime'] = item[1]
+        cellphone['Price'] = item[2]
+        cellphone['Location'] = item[3]
+        cellphone['PhoneNum'] = item[4]
+        cellphone['Manufacturer'] = item[5]
+        cellphone['Model'] = item[6]
+        cellphone['Memory'] = item[7]
+        items.append(cellphone)
     conn.close()
     print(items)
 

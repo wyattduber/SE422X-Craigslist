@@ -38,8 +38,7 @@
                   <li>Experience Needed: {{f.Experience}}</li>
                   <li>Salary: {{f.Salary}}</li>
                   <li>Location: {{f.Location}}</li>
-                  <li>Contact Information: {{f.Email}}</li>
-                  <li>Work Options: {{f.RemotePerson}}</li>                  
+                  <li>Contact Information: {{f.Email}}</li>              
                 </ul>
             </div>
             {% endfor %}
@@ -54,7 +53,6 @@
                 <input type="text" placeholder="Salary" name="salary" value={{request.form.resersalaryvation}} > <br>
                 <input type="text" placeholder="Location" name="location" value={{request.form.location}} > <br>
                 <input type="text" placeholder="Email" name="eamil" value={{request.form.email}} > <br>
-                <input type="text" placeholder="Work Options" name="remote_person" value={{request.form.remote_person}} > <br>
                 <input type="text" placeholder="Title" name="title" value={{request.form.title}} > <br>
                 <input type="text" placeholder="Employer" name="employer" value={{request.form.employer}} > <br>
                 <input type="submit" value="Upload" style="width:60px">

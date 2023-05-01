@@ -34,12 +34,11 @@
                 <h4>{{t.Title}}</h4>
                 <ul>
                   <li>Uploaded: {{t.CreationTime}}</li>
-                  <li>Company: {{t.CompanyName}}</li>
+                  <li>Employer: {{t.Employer}}</li>
                   <li>Experience Needed: {{t.Experience}}</li>
                   <li>Salary: {{t.Salary}}</li>
                   <li>Location: {{t.Location}}</li>
-                  <li>Contact Information: {{t.PhoneNum}}</li>
-                  <li>Work Options: {{t.RemotePerson}}</li>                  
+                  <li>Email: {{t.Email}}</li>              
                 </ul>
             </div>
             {% endfor %}
@@ -53,10 +52,9 @@
                 <input type="text" placeholder="Experience Needed" name="experience" value={{request.form.experience}} > <br>
                 <input type="text" placeholder="Salary" name="salary" value={{request.form.resersalaryvation}} > <br>
                 <input type="text" placeholder="Location" name="location" value={{request.form.location}} > <br>
-                <input type="text" placeholder="Phone Number" name="phoneNum" value={{request.form.phoneNum}} > <br>
-                <input type="text" placeholder="Work Options" name="remote_person" value={{request.form.remote_person}} > <br>
+                <input type="text" placeholder="Email" name="email" value={{request.form.email}} > <br>
                 <input type="text" placeholder="Title" name="title" value={{request.form.title}} > <br>
-                <input type="text" placeholder="Company Name" name="company_name" value={{request.form.company_name}} > <br>
+                <input type="text" placeholder="Employer" name="employer" value={{request.form.employer}} > <br>
                 <input type="submit" value="Upload" style="width:60px">
                 <button type="button" onclick="document.getElementById('showMe').style.display='none'" class="cancelbtn">Cancel</button>
                 </div>

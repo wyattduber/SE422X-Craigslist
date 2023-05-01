@@ -1,5 +1,7 @@
 USE project4database;
 
+/* For Sale */
+
 CREATE TABLE IF NOT EXISTS GolfCartData(
     GolfCartID MEDIUMINT NOT NULL AUTO_INCREMENT, 
     creation_time VARCHAR(100) NOT NULL, 
@@ -59,4 +61,66 @@ CREATE TABLE IF NOT EXISTS FurnitureData (
     brand VARCHAR(100) NOT NULL, 
     furniture_type VARCHAR(100) NOT NULL, 
     PRIMARY KEY (FurnitureID)
+);
+
+/* Jobs */
+
+CREATE TABLE IF NOT EXISTS HealthcareData (
+    HealthcareID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    email VARCHAR(100) NOT NULL, 
+    salary VARCHAR(100) NOT NULL, 
+    experience VARCHAR(100) NOT NULL, 
+    title VARCHAR(100) NOT NULL, 
+    employer VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (HealthcareID)
+);
+
+CREATE TABLE IF NOT EXISTS EngineeringData (
+    EngineeringID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    email VARCHAR(100) NOT NULL, 
+    salary VARCHAR(100) NOT NULL, 
+    experience VARCHAR(100) NOT NULL, 
+    title VARCHAR(100) NOT NULL, 
+    employer VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (EngineeringID)
+);
+
+CREATE TABLE IF NOT EXISTS EducationData (
+    EducationID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    email VARCHAR(100) NOT NULL, 
+    salary VARCHAR(100) NOT NULL, 
+    experience VARCHAR(100) NOT NULL, 
+    title VARCHAR(100) NOT NULL, 
+    employer VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (EducationID)
+);
+
+CREATE TABLE IF NOT EXISTS TransportationData (
+    TransportationID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    email VARCHAR(100) NOT NULL, 
+    salary VARCHAR(100) NOT NULL, 
+    experience VARCHAR(100) NOT NULL, 
+    title VARCHAR(100) NOT NULL, 
+    employer VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (TransportationID)
+);
+
+CREATE TABLE IF NOT EXISTS FinanceData (
+    FinanceID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    email VARCHAR(100) NOT NULL, 
+    salary VARCHAR(100) NOT NULL, 
+    experience VARCHAR(100) NOT NULL, 
+    title VARCHAR(100) NOT NULL, 
+    employer VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (FinanceID)
 );
