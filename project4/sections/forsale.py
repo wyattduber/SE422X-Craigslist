@@ -11,7 +11,7 @@ import re
 
 from sections.config import DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_NAME
 
-# Cars/Truks
+# Cars/Trucks
 @app.route('/carTruck', methods=['GET'])
 def carTruck():
     msg = ''

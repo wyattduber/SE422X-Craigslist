@@ -48,7 +48,7 @@ def activities():
         time_date = request.form['time_date']
         title = request.form['title']
 
-        if location == '' or phoneNum == '' or age_group == '' or time_date == '' or title == '':
+        if location == '' or phone_num == '' or age_group == '' or time_date == '' or title == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -119,7 +119,7 @@ def musicians():
         musician_name = request.form['musician_name']
         genre = request.form['genre']
 
-        if location == '' or phoneNum == '' or musician_name == '' or genre == '':
+        if location == '' or phone_num == '' or musician_name == '' or genre == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -191,7 +191,7 @@ def childcare():
         cost = request.form['cost']
         childcare_name = request.form['childcare_name']
 
-        if location == '' or phoneNum == '' or open_hours == '' or cost == '' or childcare_name == '':
+        if location == '' or phone_num == '' or open_hours == '' or cost == '' or childcare_name == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -265,7 +265,7 @@ def events():
         entrance_fee = request.form['entrance_fee']
         event_name = request.form['event_name']
 
-        if location == '' or phoneNum == '' or date_time == '' or entrance_fee == '' or event_name == '':
+        if location == '' or phone_num == '' or date_time == '' or entrance_fee == '' or event_name == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -339,7 +339,7 @@ def groups():
         cost = request.form['cost']
         group_name = request.form['group_name']
 
-        if location == '' or phoneNum == '' or session_hours == '' or cost == '' or group_name == '':
+        if location == '' or phone_num == '' or session_hours == '' or cost == '' or group_name == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()

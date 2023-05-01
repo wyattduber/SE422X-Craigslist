@@ -8,9 +8,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     </head>
     <body>
+    {% if inSession %}
     <div id="wrapper">
         <header>
-            <h1><a href="/">Mushroom Cloud 422 Advertisement Website</a></h1>
+            <h1><a href="/">Group 8 Project 4</a></h1>
         </header>
         <nav>
             <ul>
@@ -22,24 +23,24 @@
                 <li><a href="/community">Community</a></li>
             </ul>
         </nav>
+    {% endif %}}
     <main>
         
-        <h2>Welcome to Mushroom Cloud 422</h2>
+        <h2>Welcome to Not-Craigslist!</h2>
         {% if inSession %}
           <p>Welcome, {{ inSession }}!</p>
         {% endif %}
-        <p> This website is our final phase in our project. Use the toolbar above to navigate between sections.
+        <p> Please log in, then use the toolbar above to navigate between sections.
 
         </p>
         {% if not inSession %}
-        <h3>Get started here:</h3> 
+        <h3>You are not logged in. Please do so here: </h3> 
         <form action="{{url_for('login')}}" method="post">
           <input type="text" placeholder="Username" name="username" value={{request.form.username}} > <br>
           <input type="password" placeholder="Password" name="password" value={{request.form.password}} > <br>
           <input type="submit" value="Login" style="width:60px">
         </form>
-        {% endif %}
-        {% if inSession %}
+        {% else %}
             <p>Now that you are logged in you can upload items to each category!</p>
             <p>Make sure you fill out all the necessary information when uploading a new item. Give it a shot!</p>
             <form action="{{url_for('logout')}}" method="post">
@@ -85,15 +86,7 @@
             }
         </script>
       </div>
-        <div>
-            2055 Marston Hall<br>
-            Ames, IA 50011<br>
-            888-555-5555
-        </div>
     </main>
-    <footer>
-        Copyright &copy; 2022 Mushroom Cloud 422<br>
-    </footer>
     </div>
     </body>
 </html>

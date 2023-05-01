@@ -1,9 +1,6 @@
-import functions as db
 from flask import Flask, jsonify, request, make_response, url_for, session
 from flask import render_template, redirect
 import os
-import time
-import datetime
 import MySQLdb
 import MySQLdb.cursors
 import re
@@ -11,6 +8,7 @@ import re
 from sections.config import DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_NAME
 
 app = Flask(__name__, static_url_path="")
+app.config.update(SECRET_KEY=os.urandom(24))
 
 import sections.forsale
 import sections.housing
@@ -45,7 +43,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
         cursor.execute(
-            'SELECT * FROM DB_NAME.UserData WHERE username=%s AND password=%s', (username, password))
+            f'SELECT * FROM {DB_NAME}.UserData WHERE username=%s AND password=%s', (username, password))
         record = cursor.fetchone()
         if record:
             session['loggedin'] = True
@@ -85,7 +83,7 @@ def signup():
             signupMsg = 'Passwords do not match!'
         else:
             cursor.execute(
-                "INSERT INTO DB_NAME.UserData (username, password) VALUES (%s,%s)", (username, password))
+                f"INSERT INTO {DB_NAME}.UserData (username, password) VALUES (%s,%s)", (username, password))
             conn.commit()
             conn.close()
             signupMsg = 'Signed up successfully!'
