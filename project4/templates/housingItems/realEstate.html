@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Phase 4</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    </head>
+    <body>
+    <div id="wrapper">
+        <header>
+            <h1><a href="/">Mushroom Cloud 422 Advertisement Website</a></h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/sales">For Sale</a></li>
+                <li><a href="/housing">Housing</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/jobs">Jobs</a></li>
+                <li><a href="/community">Community</a></li>
+            </ul>
+        </nav>
+    <main>
+        <div>
+            <h2>Apartments</h2>
+            {% if msg %}
+                <p>{{ msg }}</p>
+            {% endif %}
+
+            {% for r in realEstates %}
+            <div> 
+                <h4>Cost: {{r.Cost}}</h4>
+                <ul>
+                  <li>Uploaded: {{r.CreationTime}}</li>
+                  <li>Location: {{r.Location}}</li>
+                  <li>Contact Information: {{r.PhoneNum}}</li>
+                  <li>Square footage: {{r.SquareFeet}}</li>
+                  <li>Number of bathrooms: {{r.NumBathrooms}}</li>
+                  <li>Number of bedrooms: {{r.NumBedrooms}}</li>
+                </ul>
+            </div>
+            {% endfor %}
+
+            {% if inSession %}
+            <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload a house have for sale by clicking here.</u></p>
+            <div id="showMe" class="modal">
+  
+            <form class="modal-content animate" action="{{url_for('realEstate')}}" method="post">
+                <div class="container">
+                <input type="text" placeholder="Cost" name="cost" value={{request.form.cost}} > <br>
+                <input type="text" placeholder="Location" name="location" value={{request.form.location}} > <br>
+                <input type="text" placeholder="Phone Number" name="phoneNum" value={{request.form.phoneNum}} > <br>
+                <input type="text" placeholder="Square footage" name="square_feet" value={{request.form.square_feet}} > <br>
+                <input type="text" placeholder="Number of bathrooms" name="num_bathrooms" value={{request.form.num_bathrooms}} > <br>
+                <input type="text" placeholder="Number of bedrooms" name="num_bedrooms" value={{request.form.num_bedrooms}} > <br>
+                <input type="submit" value="Upload" style="width:60px">
+                <button type="button" onclick="document.getElementById('showMe').style.display='none'" class="cancelbtn">Cancel</button>
+                </div>
+            </form>
+            </div>
+            <script>
+                var modal = document.getElementById('showMe');
+                window.onclick = function(event) {
+                    if (event.target == modal) modal.style.display = "none";
+                }
+            </script>
+            {% endif %}
+        </div>
+      </div>
+        <div>
+            2055 Marston Hall<br>
+            Ames, IA 50011<br>
+            888-555-5555
+        </div>
+    </main>
+    <footer>
+        Copyright &copy; 2022 Mushroom Cloud 422<br>
+    </footer>
+</body>
+</html>

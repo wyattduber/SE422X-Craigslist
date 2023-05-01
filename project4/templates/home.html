@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Phase 4</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    </head>
+    <body>
+    <div id="wrapper">
+        <header>
+            <h1><a href="/">Mushroom Cloud 422 Advertisement Website</a></h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/for-sale">For Sale</a></li>
+                <li><a href="/housing">Housing</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/jobs">Jobs</a></li>
+                <li><a href="/community">Community</a></li>
+            </ul>
+        </nav>
+    <main>
+        
+        <h2>Welcome to Mushroom Cloud 422</h2>
+        {% if inSession %}
+          <p>Welcome, {{ inSession }}!</p>
+        {% endif %}
+        <p> This website is our final phase in our project. Use the toolbar above to navigate between sections.
+
+        </p>
+        {% if not inSession %}
+        <h3>Get started here:</h3> 
+        <form action="{{url_for('login')}}" method="post">
+          <input type="text" placeholder="Username" name="username" value={{request.form.username}} > <br>
+          <input type="password" placeholder="Password" name="password" value={{request.form.password}} > <br>
+          <input type="submit" value="Login" style="width:60px">
+        </form>
+        {% endif %}
+        {% if inSession %}
+            <p>Now that you are logged in you can upload items to each category!</p>
+            <p>Make sure you fill out all the necessary information when uploading a new item. Give it a shot!</p>
+            <form action="{{url_for('logout')}}" method="post">
+                <input type="submit" value="Logout" style="width:60px">
+            </form>
+        {% endif %}
+        {% if loginMsg %}
+            <p>{{ loginMsg }}</p>
+        {% endif %}
+        {% if signupMsg %}
+            <p>{{ signupMsg }}</p>
+        {% endif %}
+        <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Not signed up yet? Click here to get started.</u></p>
+        <div id="showMe" class="modal">
+  
+            <form class="modal-content animate" action="{{url_for('signup')}}" method="post">
+              <div class="container">
+                <label for="uname"><b>Username</b></label> <br>
+                <input type="text" placeholder="Enter Username" name="uname" value={{request.form.uname}} > <br>
+          
+                <label for="pword"><b>Password</b></label> <br>
+                <input type="password" placeholder="Enter Password" name="pword" value={{request.form.pword}} > <br>
+
+                <label for="cpword"><b>Confirm Password</b></label> <br>
+                <input type="password" placeholder="Confirm Password" name="cpword" value={{request.form.cpword}} > <br>
+                  
+                <label>
+                  <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label> <br>
+
+                <p>{{ signupMsg }}</p>
+                <!-- <button type="submit" onclick="{{url_for('signup')}}">Sign Up</button>  -->
+                <input type="submit" value="Sign Up" style="width:60px">
+                <button type="button" onclick="document.getElementById('showMe').style.display='none'" class="cancelbtn">Cancel</button>
+                
+              </div>
+            </form>
+          </div>
+        <script>
+            var modal = document.getElementById('showMe');
+            window.onclick = function(event) {
+                if (event.target == modal) modal.style.display = "none";
+            }
+        </script>
+      </div>
+        <div>
+            2055 Marston Hall<br>
+            Ames, IA 50011<br>
+            888-555-5555
+        </div>
+    </main>
+    <footer>
+        Copyright &copy; 2022 Mushroom Cloud 422<br>
+    </footer>
+    </div>
+    </body>
+</html>

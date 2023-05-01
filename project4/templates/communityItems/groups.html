@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Phase 4</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    </head>
+    <body>
+    <div id="wrapper">
+        <header>
+            <h1><a href="/">Mushroom Cloud 422 Advertisement Website</a></h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/sales">For Sale</a></li>
+                <li><a href="/housing">Housing</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/jobs">Jobs</a></li>
+                <li><a href="/community">Community</a></li>
+            </ul>
+        </nav>
+    <main>
+        <div>
+            <h2>Groups</h2>
+            {% if msg %}
+            <p>{{ msg }}</p>
+            {% endif %}
+
+            {% for g in groups %}
+            <div>
+                <h4>{{g.GroupName}}</h4>
+                <ul>
+                    <li>Uploaded: {{g.CreationTime}}</li>
+                    <li>Location: {{g.Location}}</li>
+                    <li>Contact Information: {{g.PhoneNum}}</li>
+                    <li>Session Hours: {{g.SessionHours}}</li>
+                    <li>Entrance Fee: {{g.Cost}}</li>
+                </ul>
+            </div>
+            {% endfor %}
+
+            {% if inSession %}
+            <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload
+                    a group you want to share by clicking here.</u></p>
+            <div id="showMe" class="modal">
+
+                <form class="modal-content animate" action="{{url_for('groups')}}" method="post">
+                    <div class="container">
+                        <input type="text" placeholder="Location" name="location" value={{request.form.location}}>
+                        <br>
+                        <input type="text" placeholder="Phone Number" name="phone_num"
+                            value={{request.form.phone_num}}> <br>
+                        <input type="text" placeholder="Session Hours" name="session_hours" value={{request.form.session_hours}}> <br>
+                        <input type="text" placeholder="Cost" name="cost" value={{request.form.cost}}> <br>
+                        <input type="text" placeholder="Group Name" name="group_name"
+                            value={{request.form.group_name}}> <br>
+                        <input type="submit" value="Upload" style="width:60px">
+                        <button type="button" onclick="document.getElementById('showMe').style.display='none'"
+                            class="cancelbtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <script>
+                var modal = document.getElementById('showMe');
+                window.onclick = function (event) {
+                    if (event.target == modal) modal.style.display = "none";
+                }
+            </script>
+            {% endif %}
+        </div>
+      </div>
+        <div>
+            2055 Marston Hall<br>
+            Ames, IA 50011<br>
+            888-555-5555
+        </div>
+    </main>
+    <footer>
+        Copyright &copy; 2022 Mushroom Cloud 422<br>
+    </footer>
+</body>
+</html>
