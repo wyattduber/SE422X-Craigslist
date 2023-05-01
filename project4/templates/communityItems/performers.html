@@ -24,26 +24,28 @@
         </nav>
     <main>
         <div>
-            <h2>Musicians</h2>
+            <h2>Performers</h2>
             {% if msg %}
             <p>{{ msg }}</p>
             {% endif %}
 
-            {% for m in musicians %}
+            {% for p in performers %}
             <div>
-                <h4>{{m.MusicianName}}</h4>
+                <h4>{{p.PerformerName}}</h4>
                 <ul>
-                    <li>Uploaded: {{m.CreationTime}}</li>
-                    <li>Location: {{m.Location}}</li>
-                    <li>Contact Information: {{m.PhoneNum}}</li>
-                    <li>Genre: {{m.Genre}}</li>
+                    <li>Uploaded: {{p.CreationTime}}</li>
+                    <li>Location: {{p.Location}}</li>
+                    <li>Contact Information: {{p.PhoneNum}}</li>
+                    <li>Genre: {{p.Genre}}</li>
+                    <li>Show Time: {{p.ShowTime}}</li>
+                    <li>Age Rating: {{p.AgeRating}}</li>
                 </ul>
             </div>
             {% endfor %}
 
             {% if inSession %}
             <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload
-                    a musician you want to share by clicking here.</u></p>
+                    a performer you want to share by clicking here.</u></p>
             <div id="showMe" class="modal">
 
                 <form class="modal-content animate" action="{{url}}" method="post">
@@ -52,8 +54,10 @@
                         <br>
                         <input type="text" placeholder="Phone Number" name="phone_num"
                             value={{request.form.phone_num}}> <br>
-                        <input type="text" placeholder="Musician Name" name="musician_name" value={{request.form.musician_name}}> <br>
+                        <input type="text" placeholder="Performer Name" name="performer_name" value={{request.form.performer_name}}> <br>
                         <input type="text" placeholder="Genre" name="genre" value={{request.form.genre}}> <br>
+                        <input type="text" placeholder="Show Time" name="show_time" value={{request.form.show_time}}> <br>
+                        <input type="text" placeholder="Age Rating" name="age_rating" value={{request.form.age_rating}}> <br>
                         <input type="submit" value="Upload" style="width:60px">
                         <button type="button" onclick="document.getElementById('showMe').style.display='none'"
                             class="cancelbtn">Cancel</button>

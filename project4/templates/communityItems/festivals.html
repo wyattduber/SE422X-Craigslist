@@ -26,27 +26,28 @@
         </nav>
         <main>
             <div>
-                <h2>Events</h2>
+                <h2>Festivals</h2>
                 {% if msg %}
                 <p>{{ msg }}</p>
                 {% endif %}
 
-                {% for e in events %}
+                {% for f in festivals %}
                 <div>
-                    <h4>{{e.EventName}}</h4>
+                    <h4>{{f.FestivalName}}</h4>
                     <ul>
-                        <li>Uploaded: {{e.CreationTime}}</li>
-                        <li>Location: {{e.Location}}</li>
-                        <li>Contact Information: {{e.PhoneNum}}</li>
-                        <li>Date / Time: {{e.DateTime}}</li>
-                        <li>Entrance Fee: {{e.EntranceFee}}</li>
+                        <li>Uploaded: {{f.CreationTime}}</li>
+                        <li>Location: {{f.Location}}</li>
+                        <li>Contact Information: {{f.PhoneNum}}</li>
+                        <li>Date / Time: {{f.DateTime}}</li>
+                        <li>Entrance Fee: {{f.EntranceFee}}</li>
+                        <li>Capacity: {{f.Capacity}}</li>
                     </ul>
                 </div>
                 {% endfor %}
 
                 {% if inSession %}
                 <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload
-                        an event you want to share by clicking here.</u></p>
+                        a festival you want to share by clicking here.</u></p>
                 <div id="showMe" class="modal">
 
                     <form class="modal-content animate" action="{{url}}" method="post">
@@ -57,8 +58,9 @@
                                 value={{request.form.phone_num}}> <br>
                             <input type="text" placeholder="Date / Time" name="date_time" value={{request.form.date_time}}> <br>
                             <input type="text" placeholder="Entrance Fee" name="entrance_fee" value={{request.form.entrance_fee}}> <br>
-                            <input type="text" placeholder="Event Name" name="event_name"
-                                value={{request.form.event_name}}> <br>
+                            <input type="text" placeholder="Festival Name" name="festival_name"
+                                value={{request.form.festival_name}}> <br>
+                            <input capacity="text" placeholder="Capcity" name="capacity"> <br>
                             <input type="submit" value="Upload" style="width:60px">
                             <button type="button" onclick="document.getElementById('showMe').style.display='none'"
                                 class="cancelbtn">Cancel</button>
@@ -67,8 +69,8 @@
                 </div>
                 <script>
                     var modal = document.getElementById('showMe');
-                    window.onclick = function (event) {
-                        if (event.target == modal) modal.style.display = "none";
+                    window.onclick = function (festival) {
+                        if (festival.target == modal) modal.style.display = "none";
                     }
                 </script>
                 {% endif %}

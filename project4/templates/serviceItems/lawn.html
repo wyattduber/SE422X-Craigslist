@@ -24,27 +24,27 @@
         </nav>
     <main>
         <div>
-            <h2>Automotive</h2>
+            <h2>Lawn</h2>
             {% if msg %}
                 <p>{{ msg }}</p>
             {% endif %}
 
-            {% for a in automotive %}
+            {% for l in lawn %}
             <div>
-                <h4>{{a.Reservation}}</h4>
+                <h4>{{l.CompanyName}}</h4>
                 <ul>
-                  <li>Uploaded: {{a.CreationTime}}</li>
-                  <li>Cost: {{a.Cost}}</li>
-                  <li>Location: {{a.Location}}</li>
-                  <li>Contact Information: {{a.PhoneNum}}</li>
-                  <li>Operating Hours: {{a.OperatingHours}}</li>
-                  <li>Duration: {{a.Duration}}</li>
+                  <li>Uploaded: {{l.CreationTime}}</li>
+                  <li>Cost: {{l.Cost}}</li>
+                  <li>Location: {{l.Location}}</li>
+                  <li>Contact Information: {{l.PhoneNum}}</li>
+                  <li>Operating Hours: {{l.OperatingHours}}</li>
+                  <li>Service Type: {{l.ServiceType}}</li>
                 </ul>
             </div>
             {% endfor %}
 
             {% if inSession %}
-            <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload an automotive service you offer by clicking here.</u></p>
+            <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload an lawn service you offer by clicking here.</u></p>
             <div id="showMe" class="modal">
 
             <form class="modal-content animate" action="{{url}}" method="post">
@@ -53,8 +53,8 @@
                 <input type="text" placeholder="Location" name="location" value={{request.form.location}} > <br>
                 <input type="text" placeholder="Phone Number" name="phoneNum" value={{request.form.phoneNum}} > <br>
                 <input type="text" placeholder="Operating Hours" name="operating_hours" value={{request.form.operating_hours}} > <br>
-                <input type="text" placeholder="Duration" name="duration" value={{request.form.duration}} > <br>
-                <input type="text" placeholder="Service" name="reservation" value={{request.form.reservation}} > <br>
+                <input type="text" placeholder="Company Name" name="company_name" value={{request.form.company_name}} > <br>
+                <input type="text" placeholder="Service" name="service_type" value={{request.form.service_type}} > <br>
                 <input type="submit" value="Upload" style="width:60px">
                 <button type="button" onclick="document.getElementById('showMe').style.display='none'" class="cancelbtn">Cancel</button>
                 </div>

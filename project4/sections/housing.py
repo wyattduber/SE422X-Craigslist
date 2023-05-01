@@ -40,6 +40,8 @@ def apartments():
         apartment['SquareFeet'] = item[5]
         apartment['NumBathrooms'] = item[6]
         apartment['NumBedrooms'] = item[7]
+        apartment['Pets'] = item[8]
+        apartment['Laundry'] = item[9]
         items.append(apartment)
     conn.close()
     print(items)
@@ -51,8 +53,10 @@ def apartments():
         square_feet = request.form['square_feet']
         num_bathrooms = request.form['num_bathrooms']
         num_bedrooms = request.form['num_bedrooms']
+        pets = request.form['pets']
+        laundry = request.form['laundy']
 
-        if rent == '' or location == '' or phoneNum == '' or square_feet == '' or num_bathrooms == '' or num_bedrooms == '':
+        if rent == '' or location == '' or phoneNum == '' or square_feet == '' or num_bathrooms == '' or num_bedrooms == '' or pets == '' or laundry == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -73,7 +77,9 @@ def apartments():
                         rent+"', '" +\
                         square_feet+"', '" +\
                         num_bathrooms+"', '" +\
-                        num_bedrooms+"');"
+                        num_bedrooms+"', '" +\
+                        pets+"', '" +\
+                        laundry+"');"
 
             print(statement)
             result = cursor.execute(statement)
@@ -186,6 +192,9 @@ def rooms():
         room['PhoneNum'] = item[3]
         room['Rent'] = item[4]
         room['SquareFeet'] = item[5]
+        room['Term'] = item[6]
+        room['Furnished'] = item[7]
+        room['Gender'] = item[8]
         items.append(room)
     conn.close()
     print(items)
@@ -195,8 +204,11 @@ def rooms():
         location = request.form['location']
         phoneNum = request.form['phoneNum']
         square_feet = request.form['square_feet']
+        term = request.form['term']
+        furnished = request.form['furnished']
+        gender = request.form['gender']
 
-        if rent == '' or location == '' or phoneNum == '' or square_feet == '':
+        if rent == '' or location == '' or phoneNum == '' or square_feet == '' or term == '' or furnished == '' or gender == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -215,7 +227,10 @@ def rooms():
                         location+"', '" +\
                         phoneNum+"', '" +\
                         rent+"', '" +\
-                        square_feet+"');"
+                        square_feet+"', '" +\
+                        term+"', '" +\
+                        furnished+"', '" +\
+                        gender+"');"
 
             print(statement)
             result = cursor.execute(statement)
@@ -253,7 +268,7 @@ def realEstate():
         realEstate['Location'] = item[2]
         realEstate['PhoneNum'] = item[3]
         realEstate['Cost'] = item[4]
-        realEstate['SquareFeet'] = item[5]
+        realEstate['Acreage'] = item[5]
         realEstate['NumBathrooms'] = item[6]
         realEstate['NumBedrooms'] = item[7]
         items.append(realEstate)
@@ -264,11 +279,11 @@ def realEstate():
         cost = request.form['cost']
         location = request.form['location']
         phoneNum = request.form['phoneNum']
-        square_feet = request.form['square_feet']
+        acreage = request.form['acreage']
         num_bathrooms = request.form['num_bathrooms']
         num_bedrooms = request.form['num_bedrooms']
 
-        if cost == '' or location == '' or phoneNum == '' or square_feet == '' or num_bathrooms == '' or num_bedrooms == '':
+        if cost == '' or location == '' or phoneNum == '' or acreage == '' or num_bathrooms == '' or num_bedrooms == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -282,12 +297,12 @@ def realEstate():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.RealEstateData (creation_time, location, phone_num, cost, square_feet, num_bathrooms, num_bedrooms) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.RealEstateData (creation_time, location, phone_num, cost, acreage, num_bathrooms, num_bedrooms) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
                         cost+"', '" +\
-                        square_feet+"', '" +\
+                        acreage+"', '" +\
                         num_bathrooms+"', '" +\
                         num_bedrooms+"');"
 

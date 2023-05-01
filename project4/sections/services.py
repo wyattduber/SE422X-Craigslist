@@ -11,8 +11,8 @@ import re
 
 from sections.config import DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_NAME
 
-@app.route('/automotive', methods=['GET', 'POST'])
-def automotive():
+@app.route('/lawn', methods=['GET', 'POST'])
+def lawnCare():
     msg = ''
     inSession = None
     if 'loggedin' in session:
@@ -26,21 +26,21 @@ def automotive():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute(f"SELECT * FROM {DB_NAME}.AutomotiveData;")
+    cursor.execute("SELECT * FROM DB_NAME.LawnData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
-        automotive = {}
-        automotive['AutomativeID'] = item[0]
-        automotive['CreationTime'] = item[1]
-        automotive['Location'] = item[2]
-        automotive['PhoneNum'] = item[3]
-        automotive['Cost'] = item[4]
-        automotive['OperatingHours'] = item[5]
-        automotive['Duration'] = item[6]
-        automotive['Reservation'] = item[7]
-        items.append(automotive)
+        lawn = {}
+        lawn['LawnID'] = item[0]
+        lawn['CreationTime'] = item[1]
+        lawn['Location'] = item[2]
+        lawn['PhoneNum'] = item[3]
+        lawn['Cost'] = item[4]
+        lawn['OperatingHours'] = item[5]
+        lawn['CompanyName'] = item[6]
+        lawn['ServiceType'] = item[7]
+        items.append(lawn)
     conn.close()
     print(items)
 
@@ -49,10 +49,10 @@ def automotive():
         location = request.form['location']
         phoneNum = request.form['phoneNum']
         operating_hours = request.form['operating_hours']
-        duration = request.form['duration']
-        reservation = request.form['reservation']
+        company_name = request.form['company_name']
+        service_type = request.form['service_type']
 
-        if cost == '' or location == '' or phoneNum == '' or operating_hours == '' or duration == '' or reservation == '':
+        if cost == '' or location == '' or phoneNum == '' or operating_hours == '' or company_name == '' or service_type == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -66,28 +66,28 @@ def automotive():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.AutomotiveData (creation_time, location, phone_num, cost, operating_hours, duration, reservation) VALUES (" +\
+            statement = "INSERT INTO DB_NAME.LawnData (creation_time, location, phone_num, cost, operating_hours, company_name, service_type) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
                         cost+"', '" +\
                         operating_hours+"', '" +\
-                        duration+"', '" +\
-                        reservation+"');"
+                        company_name+"', '" +\
+                        service_type+"');"
 
             print(statement)
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
-            return redirect('/automotive')
+            return redirect('/lawn')
     else:
         msg = 'You can only view these options. Sign up or Login if you want to upload items!'
 
-    return render_template('/serviceItems/automotive.html', inSession=inSession, automotive=items, msg=msg)
+    return render_template('/serviceItems/lawn.html', inSession=inSession, lawn=items, msg=msg)
 
 
-@app.route('/computer', methods=['GET', 'POST'])
-def computer():
+@app.route('/phone', methods=['GET', 'POST'])
+def phone():
     msg = ''
     inSession = None
     if 'loggedin' in session:
@@ -101,20 +101,21 @@ def computer():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute(f"SELECT * FROM {DB_NAME}.ComputerData;")
+    cursor.execute("SELECT * FROM DB_NAME.PhoneData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
-        computer = {}
-        computer['ComputerID'] = item[0]
-        computer['CreationTime'] = item[1]
-        computer['Location'] = item[2]
-        computer['PhoneNum'] = item[3]
-        computer['Cost'] = item[4]
-        computer['OperatingHours'] = item[5]
-        computer['Reservation'] = item[6]
-        items.append(computer)
+        phone = {}
+        phone['PhoneID'] = item[0]
+        phone['CreationTime'] = item[1]
+        phone['Location'] = item[2]
+        phone['PhoneNum'] = item[3]
+        phone['Cost'] = item[4]
+        phone['OperatingHours'] = item[5]
+        phone['CompanyName'] = item[6]
+        phone['RepairType'] = item[7]
+        items.append(phone)
     conn.close()
     print(items)
 
@@ -123,9 +124,10 @@ def computer():
         location = request.form['location']
         phoneNum = request.form['phoneNum']
         operating_hours = request.form['operating_hours']
-        reservation = request.form['reservation']
+        company_name = request.form['company_name']
+        repair_type = request.form['repair_type']
 
-        if cost == '' or location == '' or phoneNum == '' or operating_hours == '' or reservation == '':
+        if cost == '' or location == '' or phoneNum == '' or operating_hours == '' or company_name == '' or repair_type == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -139,26 +141,27 @@ def computer():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.ComputerData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
+            statement = "INSERT INTO DB_NAME.PhoneData (creation_time, location, phone_num, cost, operating_hours, company_name, repair_type) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
                         cost+"', '" +\
                         operating_hours+"', '" +\
-                        reservation+"');"
+                        company_name+"', '" +\
+                        repair_type+"');" 
 
             print(statement)
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
-            return redirect('/computer')
+            return redirect('/phone')
     else:
         msg = 'You can only view these options. Sign up or Login if you want to upload items!'
 
-    return render_template('/serviceItems/computer.html', inSession=inSession, computer=items, msg=msg)
+    return render_template('/serviceItems/phone.html', inSession=inSession, phone=items, msg=msg)
 
-@app.route('/movingLabor', methods=['GET', 'POST'])
-def movingLabor():
+@app.route('/plumbing', methods=['GET', 'POST'])
+def plumbing():
     msg = ''
     inSession = None
     if 'loggedin' in session:
@@ -172,20 +175,21 @@ def movingLabor():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute(f"SELECT * FROM {DB_NAME}.MovingLaborData;")
+    cursor.execute("SELECT * FROM DB_NAME.PlumbingData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
-        movingLabor = {}
-        movingLabor['MovingLaborID'] = item[0]
-        movingLabor['CreationTime'] = item[1]
-        movingLabor['Location'] = item[2]
-        movingLabor['PhoneNum'] = item[3]
-        movingLabor['Cost'] = item[4]
-        movingLabor['OperatingHours'] = item[5]
-        movingLabor['Reservation'] = item[6]
-        items.append(movingLabor)
+        plumbing = {}
+        plumbing['PlumbingID'] = item[0]
+        plumbing['CreationTime'] = item[1]
+        plumbing['Location'] = item[2]
+        plumbing['PhoneNum'] = item[3]
+        plumbing['Cost'] = item[4]
+        plumbing['OperatingHours'] = item[5]
+        plumbing['CompanyName'] = item[6]
+        plumbing['RepairType'] = item[7]
+        items.append(plumbing)
     conn.close()
     print(items)
 
@@ -194,9 +198,10 @@ def movingLabor():
         location = request.form['location']
         phoneNum = request.form['phoneNum']
         operating_hours = request.form['operating_hours']
-        reservation = request.form['reservation']
+        company_name = request.form['company_name']
+        repair_type = request.form['repair_type']
 
-        if cost == '' or location == '' or phoneNum == '' or operating_hours == '' or reservation == '':
+        if cost == '' or location == '' or phoneNum == '' or operating_hours == '' or company_name == '' or repair_type == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -210,26 +215,27 @@ def movingLabor():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.MovingLaborData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
+            statement = "INSERT INTO DB_NAME.PlumbingData (creation_time, location, phone_num, cost, operating_hours, company_name, repair_type) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
                         cost+"', '" +\
                         operating_hours+"', '" +\
-                        reservation+"');"
+                        company_name+"', '" +\
+                        repair_type+"');"
 
             print(statement)
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
 
-            return redirect('/movingLabor')
+            return redirect('/plumbing')
     else:
         msg = 'Sign up or Login if you want to upload items!'
 
-    return render_template('/serviceItems/movingLabor.html', inSession=inSession, movingLabor=items, msg=msg)
+    return render_template('/serviceItems/plumbing.html', inSession=inSession, plumbing=items, msg=msg)
 
-@app.route('/legal', methods=['GET', 'POST'])
+@app.route('/internet', methods=['GET', 'POST'])
 def legal():
     msg = ''
     inSession = None
@@ -244,20 +250,21 @@ def legal():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute(f"SELECT * FROM {DB_NAME}.LegalData;")
+    cursor.execute("SELECT * FROM DB_NAME.InternetData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
-        legal = {}
-        legal['LegalID'] = item[0]
-        legal['CreationTime'] = item[1]
-        legal['Location'] = item[2]
-        legal['PhoneNum'] = item[3]
-        legal['Cost'] = item[4]
-        legal['OperatingHours'] = item[5]
-        legal['Reservation'] = item[6]
-        items.append(legal)
+        internet = {}
+        internet['InternetID'] = item[0]
+        internet['CreationTime'] = item[1]
+        internet['Location'] = item[2]
+        internet['PhoneNum'] = item[3]
+        internet['Cost'] = item[4]
+        internet['OperatingHours'] = item[5]
+        internet['CompanyName'] = item[6]
+        internet['Speed'] = item[7]
+        items.append(internet)
     conn.close()
     print(items)
 
@@ -266,9 +273,10 @@ def legal():
         location = request.form['location']
         phoneNum = request.form['phoneNum']
         operating_hours = request.form['operating_hours']
-        reservation = request.form['reservation']
+        company_name = request.form['company_name']
+        speed = request.form['speed']
 
-        if cost == '' or location == '' or phoneNum == '' or operating_hours == '' or reservation == '':
+        if cost == '' or location == '' or phoneNum == '' or operating_hours == '' or company_name == '' or speed == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -282,26 +290,27 @@ def legal():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.LegalData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
+            statement = "INSERT INTO DB_NAME.InternetData (creation_time, location, phone_num, cost, operating_hours, company_name, speed) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
                         cost+"', '" +\
                         operating_hours+"', '" +\
-                        reservation+"');"
+                        company_name+"', '" +\
+                        speed+"');"
 
             print(statement)
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
 
-            return redirect('/legal')
+            return redirect('/internet')
     else:
         msg = 'Sign up or Login if you want to upload items!'
 
-    return render_template('/serviceItems/legal.html', inSession=inSession, legal=items, msg=msg)
+    return render_template('/serviceItems/internet.html', inSession=inSession, internet=items, msg=msg)
 
-@app.route('/farm', methods=['GET', 'POST'])
+@app.route('/painting', methods=['GET', 'POST'])
 def farm():
     msg = ''
     inSession = None
@@ -316,20 +325,21 @@ def farm():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute(f"SELECT * FROM {DB_NAME}.FarmData;")
+    cursor.execute("SELECT * FROM DB_NAME.PaintingData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
-        farm = {}
-        farm['FarmID'] = item[0]
-        farm['CreationTime'] = item[1]
-        farm['Location'] = item[2]
-        farm['PhoneNum'] = item[3]
-        farm['Cost'] = item[4]
-        farm['OperatingHours'] = item[5]
-        farm['Reservation'] = item[6]
-        items.append(farm)
+        paint = {}
+        paint['PaintingID'] = item[0]
+        paint['CreationTime'] = item[1]
+        paint['Location'] = item[2]
+        paint['PhoneNum'] = item[3]
+        paint['Cost'] = item[4]
+        paint['OperatingHours'] = item[5]
+        paint['CompanyName'] = item[6]
+        paint['color'] = item[7]
+        items.append(paint)
     conn.close()
     print(items)
 
@@ -338,9 +348,10 @@ def farm():
         location = request.form['location']
         phoneNum = request.form['phoneNum']
         operating_hours = request.form['operating_hours']
-        reservation = request.form['reservation']
+        company_name = request.form['company_name']
+        color = request.form['color']
 
-        if cost == '' or location == '' or phoneNum == '' or operating_hours == '' or reservation == '':
+        if cost == '' or location == '' or phoneNum == '' or operating_hours == '' or company_name == '' or color == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -354,21 +365,22 @@ def farm():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.FarmData (creation_time, location, phone_num, cost, operating_hours, reservation) VALUES (" +\
+            statement = "INSERT INTO DB_NAME.PaintingData (creation_time, location, phone_num, cost, operating_hours, company_name, color) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
                         cost+"', '" +\
                         operating_hours+"', '" +\
-                        reservation+"');"
+                        company_name+"', '" +\
+                        color+"');"
 
             print(statement)
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
 
-            return redirect('/farm')
+            return redirect('/painting')
     else:
         msg = 'Sign up or Login if you want to upload items!'
 
-    return render_template('/serviceItems/farm.html', inSession=inSession, farm=items, msg=msg)
+    return render_template('/serviceItems/painting.html', inSession=inSession, paint=items, msg=msg)

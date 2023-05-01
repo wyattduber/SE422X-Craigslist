@@ -1,5 +1,67 @@
 USE project4database;
 
+/* Community */
+
+CREATE TABLE IF NOT EXISTS ActivitiesData(
+    ActivityID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    age_group VARCHAR(100) NOT NULL, 
+    time_date VARCHAR(100) NOT NULL, 
+    title VARCHAR(100) NOT NULL, 
+    capacity VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (ActivityID)
+);
+
+CREATE TABLE IF NOT EXISTS PerformersData(
+    PerformerID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    performer_name VARCHAR(100) NOT NULL, 
+    genre VARCHAR(100) NOT NULL, 
+    show_time VARCHAR(100) NOT NULL, 
+    age_rating VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (PerformerID)
+);
+
+CREATE TABLE IF NOT EXISTS ChildCareData(
+    ChildCareID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    open_hours VARCHAR(100) NOT NULL, 
+    cost VARCHAR(100) NOT NULL, 
+    childcare_name VARCHAR(100) NOT NULL, 
+    capacity VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (ChildCareID)
+);
+
+CREATE TABLE IF NOT EXISTS FestivalsData(
+    FestivalID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    date_time VARCHAR(100) NOT NULL, 
+    entrance_fee VARCHAR(100) NOT NULL, 
+    festival_name VARCHAR(100) NOT NULL, 
+    capacity VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (FestivalID)
+);
+
+CREATE TABLE IF NOT EXISTS ClubsData(
+    ClubID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    session_hours VARCHAR(100) NOT NULL, 
+    cost VARCHAR(100) NOT NULL, 
+    club_name VARCHAR(100) NOT NULL, 
+    capacity VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (ClubID)
+);
+
 /* For Sale */
 
 CREATE TABLE IF NOT EXISTS GolfCartData(
@@ -63,6 +125,10 @@ CREATE TABLE IF NOT EXISTS FurnitureData (
     PRIMARY KEY (FurnitureID)
 );
 
+/* Housing */
+
+
+
 /* Jobs */
 
 CREATE TABLE IF NOT EXISTS HealthcareData (
@@ -123,4 +189,66 @@ CREATE TABLE IF NOT EXISTS FinanceData (
     title VARCHAR(100) NOT NULL, 
     employer VARCHAR(100) NOT NULL, 
     PRIMARY KEY (FinanceID)
+);
+
+/* Services */
+
+CREATE TABLE IF NOT EXISTS LawnData (
+    LawnID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    cost VARCHAR(100) NOT NULL, 
+    operating_hours VARCHAR(100) NOT NULL, 
+    company_name VARCHAR(100) NOT NULL, 
+    service_type VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (LawnID)
+);
+
+CREATE TABLE IF NOT EXISTS PhoneData (
+    PhoneID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    cost VARCHAR(100) NOT NULL, 
+    operating_hours VARCHAR(100) NOT NULL, 
+    company_name VARCHAR(100) NOT NULL, 
+    repair_type VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (PhoneID)
+);
+
+CREATE TABLE IF NOT EXISTS PlumbingData (
+    PlumbingID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    cost VARCHAR(100) NOT NULL, 
+    operating_hours VARCHAR(100) NOT NULL, 
+    company_name VARCHAR(100) NOT NULL, 
+    repair_type VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (PlumbingID)
+);
+
+CREATE TABLE IF NOT EXISTS InternetData (
+    InternetID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    cost VARCHAR(100) NOT NULL, 
+    operating_hours VARCHAR(100) NOT NULL, 
+    company_name VARCHAR(100) NOT NULL, 
+    speed VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (InternetID)
+);
+
+CREATE TABLE IF NOT EXISTS PaintingData (
+    PaintingID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    cost VARCHAR(100) NOT NULL, 
+    operating_hours VARCHAR(100) NOT NULL, 
+    company_name VARCHAR(100) NOT NULL, 
+    color VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (PaintingID)
 );

@@ -24,7 +24,7 @@
         </nav>
     <main>
         <div>
-            <h2>Apartments</h2>
+            <h2>Real Estate</h2>
             {% if msg %}
                 <p>{{ msg }}</p>
             {% endif %}
@@ -36,15 +36,15 @@
                   <li>Uploaded: {{r.CreationTime}}</li>
                   <li>Location: {{r.Location}}</li>
                   <li>Contact Information: {{r.PhoneNum}}</li>
-                  <li>Square footage: {{r.SquareFeet}}</li>
-                  <li>Number of bathrooms: {{r.NumBathrooms}}</li>
-                  <li>Number of bedrooms: {{r.NumBedrooms}}</li>
+                  <li>Acreage: {{r.Acreage}}</li>
+                  <li>Type: {{r.Type}}</li>
+                  <li>Rooms: {{r.Rooms}}</li>
                 </ul>
             </div>
             {% endfor %}
 
             {% if inSession %}
-            <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload a house have for sale by clicking here.</u></p>
+            <p style="color:blue;"><a onclick="document.getElementById('showMe').style.display='block'">Upload a house have for sale by clicking here.</a></p>
             <div id="showMe" class="modal">
   
             <form class="modal-content animate" action="{{url}}" method="post">
@@ -52,9 +52,9 @@
                 <input type="text" placeholder="Cost" name="cost" value={{request.form.cost}} > <br>
                 <input type="text" placeholder="Location" name="location" value={{request.form.location}} > <br>
                 <input type="text" placeholder="Phone Number" name="phoneNum" value={{request.form.phoneNum}} > <br>
-                <input type="text" placeholder="Square footage" name="square_feet" value={{request.form.square_feet}} > <br>
-                <input type="text" placeholder="Number of bathrooms" name="num_bathrooms" value={{request.form.num_bathrooms}} > <br>
-                <input type="text" placeholder="Number of bedrooms" name="num_bedrooms" value={{request.form.num_bedrooms}} > <br>
+                <input type="text" placeholder="Acreage" name="acreage" value={{request.form.acreage}} > <br>
+                <input type="text" placeholder="Commercial/Residential" name="type" value={{request.form.type}} > <br>
+                <input type="text" placeholder="Rooms" name="rooms" value={{request.form.rooms}} > <br>
                 <input type="submit" value="Upload" style="width:60px">
                 <button type="button" onclick="document.getElementById('showMe').style.display='none'" class="cancelbtn">Cancel</button>
                 </div>

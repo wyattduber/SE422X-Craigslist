@@ -36,6 +36,7 @@ def activities():
         activity['AgeGroup'] = item[4]
         activity['TimeDate'] = item[5]
         activity['Title'] = item[6]
+        activity['Capacity'] = item[7]
 
         items.append(activity)
     conn.close()
@@ -47,8 +48,9 @@ def activities():
         age_group = request.form['age_group']
         time_date = request.form['time_date']
         title = request.form['title']
+        capacity = request.form['capacity']
 
-        if location == '' or phone_num == '' or age_group == '' or time_date == '' or title == '':
+        if location == '' or phone_num == '' or age_group == '' or time_date == '' or title == '' or capacity == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -62,13 +64,14 @@ def activities():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.ActivitiesData (creation_time, location, phone_num, age_group, time_date, title) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.ActivitiesData (creation_time, location, phone_num, age_group, time_date, title, capacity) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\
                         age_group+"', '" +\
                         time_date+"', '" +\
-                        title+"');"
+                        title+"', '" +\
+                        capacity+"');"
 
             print(statement)
             result = cursor.execute(statement)
@@ -81,8 +84,8 @@ def activities():
 
     return render_template('/communityItems/activities.html', inSession=inSession, activities=items, msg=msg)
 
-@app.route('/musicians', methods=['GET', 'POST'])
-def musicians():
+@app.route('/performers', methods=['GET', 'POST'])
+def performers():
     msg = ''
     inSession = None
     if 'loggedin' in session:
@@ -96,30 +99,34 @@ def musicians():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute(f"SELECT * FROM {DB_NAME}.MusiciansData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.PerformersData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
-        musician = {}
-        musician['MusicianID'] = item[0]
-        musician['CreationTime'] = item[1]
-        musician['Location'] = item[2]
-        musician['PhoneNum'] = item[3]
-        musician['MusicianName'] = item[4]
-        musician['Genre'] = item[5]
+        performer = {}
+        performer['PerformerID'] = item[0]
+        performer['CreationTime'] = item[1]
+        performer['Location'] = item[2]
+        performer['PhoneNum'] = item[3]
+        performer['PerformerName'] = item[4]
+        performer['Genre'] = item[5]
+        performer['ShowTime'] = item[6]
+        performer['AgeRating'] = item[7]
 
-        items.append(musician)
+        items.append(performer)
     conn.close()
     print(items)
 
     if request.method == 'POST':
         location = request.form['location']
         phone_num = request.form['phone_num']
-        musician_name = request.form['musician_name']
+        performer_name = request.form['performer_name']
         genre = request.form['genre']
+        show_time = request.form['show_time']
+        age_rating = request.form['age_rating']
 
-        if location == '' or phone_num == '' or musician_name == '' or genre == '':
+        if location == '' or phone_num == '' or performer_name == '' or genre == '' or show_time == '' or age_rating == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -133,23 +140,25 @@ def musicians():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.MusiciansData (creation_time, location, phone_num, musician_name, genre) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.PerformersData (creation_time, location, phone_num, performer_name, genre, show_time, age_rating) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\
-                        musician_name+"', '" +\
-                        genre+"');"
+                        performer_name+"', '" +\
+                        genre+"', '" +\
+                        show_time+"', '" +\
+                        age_rating+"');"
 
             print(statement)
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
 
-            return redirect('/musicians')
+            return redirect('/performers')
     else:
         msg = 'Sign up or Login if you want to upload items!'
 
-    return render_template('/communityItems/musicians.html', inSession=inSession, musicians=items, msg=msg)
+    return render_template('/communityItems/performers.html', inSession=inSession, performers=items, msg=msg)
 
 @app.route('/childcare', methods=['GET', 'POST'])
 def childcare():
@@ -179,6 +188,7 @@ def childcare():
         child_care['OpenHours'] = item[4]
         child_care['Cost'] = item[5]
         child_care['ChildCareName'] = item[6]
+        child_care['Capacity'] = item[7]
 
         items.append(child_care)
     conn.close()
@@ -190,8 +200,9 @@ def childcare():
         open_hours = request.form['open_hours']
         cost = request.form['cost']
         childcare_name = request.form['childcare_name']
+        capacity = request.form['capacity']
 
-        if location == '' or phone_num == '' or open_hours == '' or cost == '' or childcare_name == '':
+        if location == '' or phone_num == '' or open_hours == '' or cost == '' or childcare_name == '' or capacity == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -205,13 +216,14 @@ def childcare():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.ChildCareData (creation_time, location, phone_num, open_hours, cost, childcare_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.ChildCareData (creation_time, location, phone_num, open_hours, cost, childcare_name, capacity) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\
                         open_hours+"', '" +\
                         cost+"', '" +\
-                        childcare_name+"');"
+                        childcare_name+"', '" +\
+                        capacity+"');"
 
             print(statement)
             result = cursor.execute(statement)
@@ -225,8 +237,8 @@ def childcare():
     return render_template('/communityItems/childcare.html', inSession=inSession, childcare=items, msg=msg)
 
 
-@app.route('/events', methods=['GET', 'POST'])
-def events():
+@app.route('/festivals', methods=['GET', 'POST'])
+def festivals():
     msg = ''
     inSession = None
     if 'loggedin' in session:
@@ -240,21 +252,22 @@ def events():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute(f"SELECT * FROM {DB_NAME}.EventsData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.FestivalsData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
-        event = {}
-        event['EventID'] = item[0]
-        event['CreationTime'] = item[1]
-        event['Location'] = item[2]
-        event['PhoneNum'] = item[3]
-        event['DateTime'] = item[4]
-        event['EntranceFee'] = item[5]
-        event['EventName'] = item[6]
+        festival = {}
+        festival['FestivalID'] = item[0]
+        festival['CreationTime'] = item[1]
+        festival['Location'] = item[2]
+        festival['PhoneNum'] = item[3]
+        festival['DateTime'] = item[4]
+        festival['EntranceFee'] = item[5]
+        festival['FestivalName'] = item[6]
+        festival['Capacity'] = item[7]
 
-        items.append(event)
+        items.append(festival)
     conn.close()
     print(items)
 
@@ -263,9 +276,10 @@ def events():
         phone_num = request.form['phone_num']
         date_time = request.form['date_time']
         entrance_fee = request.form['entrance_fee']
-        event_name = request.form['event_name']
+        festival_name = request.form['festival_name']
+        capacity = request.form['capacity']
 
-        if location == '' or phone_num == '' or date_time == '' or entrance_fee == '' or event_name == '':
+        if location == '' or phone_num == '' or date_time == '' or entrance_fee == '' or festival_name == '' or capacity == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -279,28 +293,29 @@ def events():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.EventsData (creation_time, location, phone_num, date_time, entrance_fee, event_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.FestivalsData (creation_time, location, phone_num, date_time, entrance_fee, festival_name, capacity) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\
                         date_time+"', '" +\
                         entrance_fee+"', '" +\
-                        event_name+"');"
+                        festival_name+"', '" +\
+                        capacity+"');"
 
             print(statement)
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
 
-            return redirect('/events')
+            return redirect('/festivals')
     else:
         msg = 'Sign up or Login if you want to upload items!'
 
-    return render_template('/communityItems/events.html', inSession=inSession, events=items, msg=msg)
+    return render_template('/communityItems/festivals.html', inSession=inSession, festivals=items, msg=msg)
 
 
-@app.route('/groups', methods=['GET', 'POST'])
-def groups():
+@app.route('/clubs', methods=['GET', 'POST'])
+def clubs():
     msg = ''
     inSession = None
     if 'loggedin' in session:
@@ -314,21 +329,22 @@ def groups():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute(f"SELECT * FROM {DB_NAME}.GroupsData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.ClubsData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
-        group = {}
-        group['GroupID'] = item[0]
-        group['CreationTime'] = item[1]
-        group['Location'] = item[2]
-        group['PhoneNum'] = item[3]
-        group['SessionHours'] = item[4]
-        group['Cost'] = item[5]
-        group['GroupName'] = item[6]
+        club = {}
+        club['ClubID'] = item[0]
+        club['CreationTime'] = item[1]
+        club['Location'] = item[2]
+        club['PhoneNum'] = item[3]
+        club['SessionHours'] = item[4]
+        club['Cost'] = item[5]
+        club['ClubName'] = item[6]
+        club['Capacity'] = item[7]
 
-        items.append(group)
+        items.append(club)
     conn.close()
     print(items)
 
@@ -337,9 +353,10 @@ def groups():
         phone_num = request.form['phone_num']
         session_hours = request.form['session_hours']
         cost = request.form['cost']
-        group_name = request.form['group_name']
+        club_name = request.form['club_name']
+        capacity = request.form['capacity']
 
-        if location == '' or phone_num == '' or session_hours == '' or cost == '' or group_name == '':
+        if location == '' or phone_num == '' or session_hours == '' or cost == '' or club_name == '' or capacity == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -353,21 +370,22 @@ def groups():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.GroupsData (creation_time, location, phone_num, session_hours, cost, group_name) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.ClubsData (creation_time, location, phone_num, session_hours, cost, club_name, capacity) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phone_num+"', '" +\
                         session_hours+"', '" +\
                         cost+"', '" +\
-                        group_name+"');"
+                        club_name+"', '" +\
+                        capacity+"');"
 
             print(statement)
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
 
-            return redirect('/groups')
+            return redirect('/clubs')
     else:
         msg = 'Sign up or Login if you want to upload items!'
 
-    return render_template('/communityItems/groups.html', inSession=inSession, groups=items, msg=msg)
+    return render_template('/communityItems/clubs.html', inSession=inSession, clubs=items, msg=msg)

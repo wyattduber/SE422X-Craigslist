@@ -24,27 +24,28 @@
         </nav>
     <main>
         <div>
-            <h2>Groups</h2>
+            <h2>Clubs</h2>
             {% if msg %}
             <p>{{ msg }}</p>
             {% endif %}
 
-            {% for g in groups %}
+            {% for c in clubs %}
             <div>
-                <h4>{{g.GroupName}}</h4>
+                <h4>{{c.ClubName}}</h4>
                 <ul>
-                    <li>Uploaded: {{g.CreationTime}}</li>
-                    <li>Location: {{g.Location}}</li>
-                    <li>Contact Information: {{g.PhoneNum}}</li>
-                    <li>Session Hours: {{g.SessionHours}}</li>
-                    <li>Entrance Fee: {{g.Cost}}</li>
+                    <li>Uploaded: {{c.CreationTime}}</li>
+                    <li>Location: {{c.Location}}</li>
+                    <li>Contact Information: {{c.PhoneNum}}</li>
+                    <li>Session Hours: {{c.SessionHours}}</li>
+                    <li>Entrance Fee: {{c.Cost}}</li>
+                    <li>Capcity: {{c.Capacity}}
                 </ul>
             </div>
             {% endfor %}
 
             {% if inSession %}
             <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload
-                    a group you want to share by clicking here.</u></p>
+                    a club you want to share by clicking here.</u></p>
             <div id="showMe" class="modal">
 
                 <form class="modal-content animate" action="{{url}}" method="post">
@@ -55,8 +56,9 @@
                             value={{request.form.phone_num}}> <br>
                         <input type="text" placeholder="Session Hours" name="session_hours" value={{request.form.session_hours}}> <br>
                         <input type="text" placeholder="Cost" name="cost" value={{request.form.cost}}> <br>
-                        <input type="text" placeholder="Group Name" name="group_name"
-                            value={{request.form.group_name}}> <br>
+                        <input type="text" placeholder="Club Name" name="club_name"
+                            value={{request.form.club_name}}> <br>
+                        <input type="text" placeholder="Capacity" name="capacity" value={{request.form.capacity}}> <br>
                         <input type="submit" value="Upload" style="width:60px">
                         <button type="button" onclick="document.getElementById('showMe').style.display='none'"
                             class="cancelbtn">Cancel</button>

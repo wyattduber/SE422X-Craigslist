@@ -37,6 +37,9 @@
                   <li>Location: {{r.Location}}</li>
                   <li>Contact Information: {{r.PhoneNum}}</li>
                   <li>Square footage: {{r.SquareFeet}}</li>
+                  <li>Term: {{r.Term}}</li>
+                  <li>Furnished: {{r.Furnished}}</li>
+                  <li>Gender: {{r.Gender}}</li>
                 </ul>
             </div>
             {% endfor %}
@@ -51,6 +54,9 @@
                 <input type="text" placeholder="Location" name="location" value={{request.form.location}} > <br>
                 <input type="text" placeholder="Phone Number" name="phoneNum" value={{request.form.phoneNum}} > <br>
                 <input type="text" placeholder="Square footage" name="square_feet" value={{request.form.square_feet}} > <br>
+                <input type="text" placeholder="Rent Length" name="term" value={{request.form.term}}> <br>
+                <input type="text" placeholder="Yes/No" name="furnished" value={{request.form.furnished}}> <br>
+                <input type="text" placeholder="Male/Female/No Preference" name="gender" value={{request.form.gender}}> <br>
                 <input type="submit" value="Upload" style="width:60px">
                 <button type="button" onclick="document.getElementById('showMe').style.display='none'" class="cancelbtn">Cancel</button>
                 </div>
