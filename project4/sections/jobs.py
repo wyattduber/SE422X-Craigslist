@@ -195,7 +195,7 @@ def education():
         salary = request.form['salary']
         location = request.form['location']
         email = request.form['email']
-        experience = request.form['emxperience']
+        experience = request.form['experience']
         title = request.form['title']
         employer = request.form['employer']
 
@@ -329,15 +329,15 @@ def finance():
 
     items = []
     for item in results:
-        Finance = {}
-        Finance['FinanceID'] = item[0]
-        Finance['CreationTime'] = item[1]
-        Finance['Location'] = item[2]
-        Finance['Email'] = item[3]
-        Finance['Salary'] = item[4]
-        Finance['Experience'] = item[5]
-        Finance['Title'] = item[6]
-        Finance['Employer'] = item[7]
+        finance = {}
+        finance['FinanceID'] = item[0]
+        finance['CreationTime'] = item[1]
+        finance['Location'] = item[2]
+        finance['Email'] = item[3]
+        finance['Salary'] = item[4]
+        finance['Experience'] = item[5]
+        finance['Title'] = item[6]
+        finance['Employer'] = item[7]
         items.append(finance)
     conn.close()
     print(items)
@@ -347,7 +347,6 @@ def finance():
         location = request.form['location']
         email = request.form['email']
         experience = request.form['experience']
-        remote_person = request.form['remote_person']
         title = request.form['title']
         employer = request.form['employer']
 

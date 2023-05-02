@@ -2,10 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>Phase 4</title>
+    <title>Project 4</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 
@@ -40,39 +39,33 @@
                         <li>Contact Information: {{c.PhoneNum}}</li>
                         <li>Open Hours: {{c.OpenHours}}</li>
                         <li>Cost Per Week: {{c.Cost}}</li>
+                        <li>Capactiy: {{c.Capacity}}</li>
                     </ul>
                 </div>
                 {% endfor %}
 
                 {% if inSession %}
-                <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload an
-                        activity you have for to share by clicking here.</u></p>
-                <div id="showMe" class="modal">
+                <div>
 
-                    <form class="modal-content animate" action="{{url}}" method="post">
+                    <form action="{{url}}" method="post">
                         <div class="container">
                             <input type="text" placeholder="Location" name="location" value={{request.form.location}}>
                             <br>
                             <input type="text" placeholder="Phone Number" name="phone_num"
                                 value={{request.form.phone_num}}> <br>
                             <input type="text" placeholder="Open Hours" name="open_hours"
-                                value={{request.form.open_hours}}>
+                                value={{request.form.open_hours}}> <br>
                                 <input type="text" placeholder="Costs Per Week" name="cost"
-                                value={{request.form.cost}}>
+                                value={{request.form.cost}}> <br>
                             <input type="text" placeholder="Child Care Name" name="childcare_name"
-                                value={{request.form.childcare_name}}>
+                                value={{request.form.childcare_name}}> <br>
+                            <input type="text" placeholder="Capacity" name="capacity" value={{request.form.capacity}}> <br>
                             <input type="submit" value="Upload" style="width:60px">
                             <button type="button" onclick="document.getElementById('showMe').style.display='none'"
                                 class="cancelbtn">Cancel</button>
                         </div>
                     </form>
                 </div>
-                <script>
-                    var modal = document.getElementById('showMe');
-                    window.onclick = function (event) {
-                        if (event.target == modal) modal.style.display = "none";
-                    }
-                </script>
                 {% endif %}
             </div>
     </div>

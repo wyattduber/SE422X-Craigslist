@@ -38,16 +38,16 @@ CREATE TABLE IF NOT EXISTS ChildCareData(
     PRIMARY KEY (ChildCareID)
 );
 
-CREATE TABLE IF NOT EXISTS FestivalsData(
-    FestivalID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+CREATE TABLE IF NOT EXISTS RideshareData(
+    RideshareID MEDIUMINT NOT NULL AUTO_INCREMENT, 
     creation_time VARCHAR(100) NOT NULL, 
-    location VARCHAR(100) NOT NULL, 
+    pickup_location VARCHAR(100) NOT NULL, 
     phone_num VARCHAR(100) NOT NULL, 
     date_time VARCHAR(100) NOT NULL, 
-    entrance_fee VARCHAR(100) NOT NULL, 
-    festival_name VARCHAR(100) NOT NULL, 
-    capacity VARCHAR(100) NOT NULL, 
-    PRIMARY KEY (FestivalID)
+    dropoff_location VARCHAR(100) NOT NULL, 
+    pay VARCHAR(100) NOT NULL, 
+    people VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (RideshareID)
 );
 
 CREATE TABLE IF NOT EXISTS ClubsData(
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS FurnitureData (
     creation_time VARCHAR(100) NOT NULL, 
     price VARCHAR(100) NOT NULL, 
     location VARCHAR(100) NOT NULL, 
-    phoneNum VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
     brand VARCHAR(100) NOT NULL, 
     furniture_type VARCHAR(100) NOT NULL, 
     PRIMARY KEY (FurnitureID)
@@ -127,7 +127,64 @@ CREATE TABLE IF NOT EXISTS FurnitureData (
 
 /* Housing */
 
+CREATE TABLE IF NOT EXISTS ApartmentData (
+    ApartmentID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    rent VARCHAR(100) NOT NULL, 
+    square_feet VARCHAR(100) NOT NULL, 
+    num_bathrooms VARCHAR(100) NOT NULL, 
+    num_bedrooms VARCHAR(100) NOT NULL, 
+    pets VARCHAR(100) NOT NULL,
+    laundry VARCHAR(100) NOT NULL,
+    PRIMARY KEY (ApartmentID)
+);
 
+CREATE TABLE IF NOT EXISTS OfficesData (
+    OfficesID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    rent VARCHAR(100) NOT NULL, 
+    square_feet VARCHAR(100) NOT NULL, 
+    num_rooms VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (OfficesID)
+);
+
+CREATE TABLE IF NOT EXISTS RoomsData (
+    RoomsID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    rent VARCHAR(100) NOT NULL, 
+    square_feet VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (RoomsID)
+);
+
+CREATE TABLE IF NOT EXISTS RealEstateData (
+    RealEstateID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    cost VARCHAR(100) NOT NULL, 
+    acreage VARCHAR(100) NOT NULL, 
+    type VARCHAR(100) NOT NULL, 
+    rooms VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (RealEstateID)
+);
+
+CREATE TABLE IF NOT EXISTS VacationData (
+    VacationID MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    creation_time VARCHAR(100) NOT NULL, 
+    location VARCHAR(100) NOT NULL, 
+    phone_num VARCHAR(100) NOT NULL, 
+    cost_per_night VARCHAR(100) NOT NULL, 
+    num_beds VARCHAR(100) NOT NULL, 
+    pool VARCHAR(100) NOT NULL, 
+    firepit VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (VacationID)
+);
 
 /* Jobs */
 

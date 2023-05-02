@@ -54,7 +54,7 @@ def apartments():
         num_bathrooms = request.form['num_bathrooms']
         num_bedrooms = request.form['num_bedrooms']
         pets = request.form['pets']
-        laundry = request.form['laundy']
+        laundry = request.form['laundry']
 
         if rent == '' or location == '' or phoneNum == '' or square_feet == '' or num_bathrooms == '' or num_bedrooms == '' or pets == '' or laundry == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
@@ -70,7 +70,7 @@ def apartments():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.ApartmentData (creation_time, location, phone_num, rent, square_feet, num_bathrooms, num_bedrooms) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.ApartmentData (creation_time, location, phone_num, rent, square_feet, num_bathrooms, num_bedrooms, pets, laundry) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -222,7 +222,7 @@ def rooms():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.RoomsData (creation_time, location, phone_num, rent, square_feet) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.RoomsData (creation_time, location, phone_num, rent, square_feet, term, furnished, gender) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -269,8 +269,8 @@ def realEstate():
         realEstate['PhoneNum'] = item[3]
         realEstate['Cost'] = item[4]
         realEstate['Acreage'] = item[5]
-        realEstate['NumBathrooms'] = item[6]
-        realEstate['NumBedrooms'] = item[7]
+        realEstate['Type'] = item[6]
+        realEstate['Rooms'] = item[7]
         items.append(realEstate)
     conn.close()
     print(items)
@@ -280,10 +280,10 @@ def realEstate():
         location = request.form['location']
         phoneNum = request.form['phoneNum']
         acreage = request.form['acreage']
-        num_bathrooms = request.form['num_bathrooms']
-        num_bedrooms = request.form['num_bedrooms']
+        type = request.form['type']
+        rooms = request.form['rooms']
 
-        if cost == '' or location == '' or phoneNum == '' or acreage == '' or num_bathrooms == '' or num_bedrooms == '':
+        if cost == '' or location == '' or phoneNum == '' or acreage == '' or type == '' or rooms == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -297,14 +297,14 @@ def realEstate():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.RealEstateData (creation_time, location, phone_num, cost, acreage, num_bathrooms, num_bedrooms) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.RealEstateData (creation_time, location, phone_num, cost, acreage, type, rooms) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
                         cost+"', '" +\
                         acreage+"', '" +\
-                        num_bathrooms+"', '" +\
-                        num_bedrooms+"');"
+                        type+"', '" +\
+                        rooms+"');"
 
             print(statement)
             result = cursor.execute(statement)
@@ -344,6 +344,8 @@ def vacation():
         vacation['PhoneNum'] = item[3]
         vacation['CostPerNight'] = item[4]
         vacation['NumBeds'] = item[5]
+        vacation['Pool'] = item[6]
+        vacation['Firepit'] = item[7]
         items.append(vacation)
     conn.close()
     print(items)
@@ -353,8 +355,10 @@ def vacation():
         phoneNum = request.form['phoneNum']
         cost_per_night = request.form['cost_per_night']
         num_beds = request.form['num_beds']
+        pool = request.form['pool']
+        firepit = request.form['firepit']
 
-        if cost_per_night == '' or location == '' or phoneNum == '' or num_beds == '':
+        if cost_per_night == '' or location == '' or phoneNum == '' or num_beds == '' or pool == '' or firepit == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -368,12 +372,14 @@ def vacation():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.VacationData (creation_time, location, phone_num, cost_per_night, num_beds) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.VacationData (creation_time, location, phone_num, cost_per_night, num_beds, pool, firepit) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
                         cost_per_night+"', '" +\
-                        num_beds+"');"
+                        num_beds+"', '" +\
+                        pool+"', '" +\
+                        firepit+"');"
 
             print(statement)
             result = cursor.execute(statement)

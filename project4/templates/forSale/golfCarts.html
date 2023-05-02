@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Phase 4</title>
+        <title>Project 4</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../style.css">
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     </head>
     <body>
@@ -47,10 +47,9 @@
             {% endfor %}
 
             {% if inSession %}
-            <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload a golf cart you have for sale by clicking here.</u></p>
-            <div id="showMe" class="modal">
+            <div >
 
-            <form class="modal-content animate" action="{{url}}" method="post">
+            <form action="{{url}}" method="post">
                 <div class="container">
                 <input type="text" placeholder="Price" name="price" value={{request.form.price}} > <br>
                 <input type="text" placeholder="Location" name="location" value={{request.form.location}} > <br>
@@ -65,12 +64,7 @@
                 </div>
             </form>
             </div>
-            <script>
-                var modal = document.getElementById('showMe');
-                window.onclick = function(event) {
-                    if (event.target == modal) modal.style.display = "none";
-                }
-            </script>
+            
             {% endif %}
         </div>
       </div>

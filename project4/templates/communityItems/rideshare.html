@@ -2,10 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>Phase 4</title>
+    <title>Project 4</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 
@@ -26,53 +25,45 @@
         </nav>
         <main>
             <div>
-                <h2>Festivals</h2>
+                <h2>Rideshare</h2>
                 {% if msg %}
                 <p>{{ msg }}</p>
                 {% endif %}
 
-                {% for f in festivals %}
+                {% for r in rideshare %}
                 <div>
-                    <h4>{{f.FestivalName}}</h4>
                     <ul>
-                        <li>Uploaded: {{f.CreationTime}}</li>
-                        <li>Location: {{f.Location}}</li>
-                        <li>Contact Information: {{f.PhoneNum}}</li>
-                        <li>Date / Time: {{f.DateTime}}</li>
-                        <li>Entrance Fee: {{f.EntranceFee}}</li>
-                        <li>Capacity: {{f.Capacity}}</li>
+                        <li>Uploaded: {{r.CreationTime}}</li>
+                        <li>Pickup Location: {{r.PickupLocation}}</li>
+                        <li>Contact Information: {{r.PhoneNum}}</li>
+                        <li>Date / Time: {{r.DateTime}}</li>
+                        <li>Dropoff Location: {{r.DropoffLocation}}</li>
+                        <li>Pay: {{r.Pay}}</li>
+                        <li>Amount of People: {{r.People}}</li>
                     </ul>
                 </div>
                 {% endfor %}
 
                 {% if inSession %}
-                <p style="color:blue;"><u onclick="document.getElementById('showMe').style.display='block'">Upload
-                        a festival you want to share by clicking here.</u></p>
-                <div id="showMe" class="modal">
+                <div>
 
-                    <form class="modal-content animate" action="{{url}}" method="post">
+                    <form action="{{url}}" method="post">
                         <div class="container">
-                            <input type="text" placeholder="Location" name="location" value={{request.form.location}}>
+                            <input type="text" placeholder="Pickup Location" name="pickup_location" value={{request.form.pickup_location}}>
                             <br>
                             <input type="text" placeholder="Phone Number" name="phone_num"
                                 value={{request.form.phone_num}}> <br>
                             <input type="text" placeholder="Date / Time" name="date_time" value={{request.form.date_time}}> <br>
-                            <input type="text" placeholder="Entrance Fee" name="entrance_fee" value={{request.form.entrance_fee}}> <br>
-                            <input type="text" placeholder="Festival Name" name="festival_name"
-                                value={{request.form.festival_name}}> <br>
-                            <input capacity="text" placeholder="Capcity" name="capacity"> <br>
+                            <input type="text" placeholder="Dropoff Location" name="dropoff_location" value={{request.form.dropoff_location}}> <br>
+                            <input type="text" placeholder="Pay" name="pay"
+                                value={{request.form.pay}}> <br>
+                            <input capacity="text" placeholder="Amount of People" name="people" value={{request.form.people}}> <br>
                             <input type="submit" value="Upload" style="width:60px">
                             <button type="button" onclick="document.getElementById('showMe').style.display='none'"
                                 class="cancelbtn">Cancel</button>
                         </div>
                     </form>
                 </div>
-                <script>
-                    var modal = document.getElementById('showMe');
-                    window.onclick = function (festival) {
-                        if (festival.target == modal) modal.style.display = "none";
-                    }
-                </script>
                 {% endif %}
             </div>
     </div>

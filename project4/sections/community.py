@@ -28,17 +28,16 @@ def activities():
 
     items = []
     for item in results:
-        activity = {}
-        activity['ActivityID'] = item[0]
-        activity['CreationTime'] = item[1]
-        activity['Location'] = item[2]
-        activity['PhoneNum'] = item[3]
-        activity['AgeGroup'] = item[4]
-        activity['TimeDate'] = item[5]
-        activity['Title'] = item[6]
-        activity['Capacity'] = item[7]
-
-        items.append(activity)
+        activities = {}
+        activities['ActivityID'] = item[0]
+        activities['CreationTime'] = item[1]
+        activities['Location'] = item[2]
+        activities['PhoneNum'] = item[3]
+        activities['AgeGroup'] = item[4]
+        activities['TimeDate'] = item[5]
+        activities['Title'] = item[6]
+        activities['Capacity'] = item[7]
+        items.append(activities)
     conn.close()
     print(items)
 
@@ -104,17 +103,16 @@ def performers():
 
     items = []
     for item in results:
-        performer = {}
-        performer['PerformerID'] = item[0]
-        performer['CreationTime'] = item[1]
-        performer['Location'] = item[2]
-        performer['PhoneNum'] = item[3]
-        performer['PerformerName'] = item[4]
-        performer['Genre'] = item[5]
-        performer['ShowTime'] = item[6]
-        performer['AgeRating'] = item[7]
-
-        items.append(performer)
+        performers = {}
+        performers['PerformerID'] = item[0]
+        performers['CreationTime'] = item[1]
+        performers['Location'] = item[2]
+        performers['PhoneNum'] = item[3]
+        performers['PerformerName'] = item[4]
+        performers['Genre'] = item[5]
+        performers['ShowTime'] = item[6]
+        performers['AgeRating'] = item[7]
+        items.append(performers)
     conn.close()
     print(items)
 
@@ -180,17 +178,16 @@ def childcare():
 
     items = []
     for item in results:
-        child_care = {}
-        child_care['ChildCareID'] = item[0]
-        child_care['CreationTime'] = item[1]
-        child_care['Location'] = item[2]
-        child_care['PhoneNum'] = item[3]
-        child_care['OpenHours'] = item[4]
-        child_care['Cost'] = item[5]
-        child_care['ChildCareName'] = item[6]
-        child_care['Capacity'] = item[7]
-
-        items.append(child_care)
+        childcare = {}
+        childcare['ChildCareID'] = item[0]
+        childcare['CreationTime'] = item[1]
+        childcare['Location'] = item[2]
+        childcare['PhoneNum'] = item[3]
+        childcare['OpenHours'] = item[4]
+        childcare['Cost'] = item[5]
+        childcare['ChildCareName'] = item[6]
+        childcare['Capacity'] = item[7]
+        items.append(childcare)
     conn.close()
     print(items)
 
@@ -237,8 +234,8 @@ def childcare():
     return render_template('/communityItems/childcare.html', inSession=inSession, childcare=items, msg=msg)
 
 
-@app.route('/festivals', methods=['GET', 'POST'])
-def festivals():
+@app.route('/rideshare', methods=['GET', 'POST'])
+def rideshare():
     msg = ''
     inSession = None
     if 'loggedin' in session:
@@ -252,34 +249,33 @@ def festivals():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute(f"SELECT * FROM {DB_NAME}.FestivalsData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.RideshareData;")
     results = cursor.fetchall()
 
     items = []
     for item in results:
-        festival = {}
-        festival['FestivalID'] = item[0]
-        festival['CreationTime'] = item[1]
-        festival['Location'] = item[2]
-        festival['PhoneNum'] = item[3]
-        festival['DateTime'] = item[4]
-        festival['EntranceFee'] = item[5]
-        festival['FestivalName'] = item[6]
-        festival['Capacity'] = item[7]
-
-        items.append(festival)
+        rideshare = {}
+        rideshare['RideshareID'] = item[0]
+        rideshare['CreationTime'] = item[1]
+        rideshare['PickupLocation'] = item[2]
+        rideshare['PhoneNum'] = item[3]
+        rideshare['DateTime'] = item[4]
+        rideshare['DropoffLocation'] = item[5]
+        rideshare['Pay'] = item[6]
+        rideshare['People'] = item[7]
+        items.append(rideshare)
     conn.close()
     print(items)
 
     if request.method == 'POST':
-        location = request.form['location']
+        pickup_location = request.form['pickup_location']
         phone_num = request.form['phone_num']
         date_time = request.form['date_time']
-        entrance_fee = request.form['entrance_fee']
-        festival_name = request.form['festival_name']
-        capacity = request.form['capacity']
+        dropoff_location = request.form['dropoff_location']
+        pay = request.form['pay']
+        people = request.form['people']
 
-        if location == '' or phone_num == '' or date_time == '' or entrance_fee == '' or festival_name == '' or capacity == '':
+        if pickup_location == '' or phone_num == '' or date_time == '' or dropoff_location == '' or pay == '' or people == '':
             msg = 'Make sure you filled our all the fields completely when uploading an item!'
         else:
             ts = time.time()
@@ -293,25 +289,25 @@ def festivals():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = f"INSERT INTO {DB_NAME}.FestivalsData (creation_time, location, phone_num, date_time, entrance_fee, festival_name, capacity) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.RideshareData (creation_time, pickup_location, phone_num, date_time, dropoff_location, pay, people) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
-                        location+"', '" +\
+                        pickup_location+"', '" +\
                         phone_num+"', '" +\
                         date_time+"', '" +\
-                        entrance_fee+"', '" +\
-                        festival_name+"', '" +\
-                        capacity+"');"
+                        dropoff_location+"', '" +\
+                        pay+"', '" +\
+                        people+"');"
 
             print(statement)
             result = cursor.execute(statement)
             conn.commit()
             conn.close()
 
-            return redirect('/festivals')
+            return redirect('/rideshare')
     else:
         msg = 'Sign up or Login if you want to upload items!'
 
-    return render_template('/communityItems/festivals.html', inSession=inSession, festivals=items, msg=msg)
+    return render_template('/communityItems/rideshare.html', inSession=inSession, rideshare=items, msg=msg)
 
 
 @app.route('/clubs', methods=['GET', 'POST'])
@@ -334,17 +330,16 @@ def clubs():
 
     items = []
     for item in results:
-        club = {}
-        club['ClubID'] = item[0]
-        club['CreationTime'] = item[1]
-        club['Location'] = item[2]
-        club['PhoneNum'] = item[3]
-        club['SessionHours'] = item[4]
-        club['Cost'] = item[5]
-        club['ClubName'] = item[6]
-        club['Capacity'] = item[7]
-
-        items.append(club)
+        clubs = {}
+        clubs['ClubID'] = item[0]
+        clubs['CreationTime'] = item[1]
+        clubs['Location'] = item[2]
+        clubs['PhoneNum'] = item[3]
+        clubs['SessionHours'] = item[4]
+        clubs['Cost'] = item[5]
+        clubs['ClubName'] = item[6]
+        clubs['Capacity'] = item[7]
+        items.append(clubs)
     conn.close()
     print(items)
 

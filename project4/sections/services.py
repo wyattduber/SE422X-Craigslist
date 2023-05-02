@@ -26,7 +26,7 @@ def lawnCare():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.LawnData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.LawnData;")
     results = cursor.fetchall()
 
     items = []
@@ -66,7 +66,7 @@ def lawnCare():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.LawnData (creation_time, location, phone_num, cost, operating_hours, company_name, service_type) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.LawnData (creation_time, location, phone_num, cost, operating_hours, company_name, service_type) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -101,7 +101,7 @@ def phone():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.PhoneData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.PhoneData;")
     results = cursor.fetchall()
 
     items = []
@@ -141,7 +141,7 @@ def phone():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.PhoneData (creation_time, location, phone_num, cost, operating_hours, company_name, repair_type) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.PhoneData (creation_time, location, phone_num, cost, operating_hours, company_name, repair_type) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -175,7 +175,7 @@ def plumbing():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.PlumbingData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.PlumbingData;")
     results = cursor.fetchall()
 
     items = []
@@ -215,7 +215,7 @@ def plumbing():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.PlumbingData (creation_time, location, phone_num, cost, operating_hours, company_name, repair_type) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.PlumbingData (creation_time, location, phone_num, cost, operating_hours, company_name, repair_type) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -236,7 +236,7 @@ def plumbing():
     return render_template('/serviceItems/plumbing.html', inSession=inSession, plumbing=items, msg=msg)
 
 @app.route('/internet', methods=['GET', 'POST'])
-def legal():
+def internet():
     msg = ''
     inSession = None
     if 'loggedin' in session:
@@ -250,7 +250,7 @@ def legal():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.InternetData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.InternetData;")
     results = cursor.fetchall()
 
     items = []
@@ -290,7 +290,7 @@ def legal():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.InternetData (creation_time, location, phone_num, cost, operating_hours, company_name, speed) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.InternetData (creation_time, location, phone_num, cost, operating_hours, company_name, speed) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
@@ -311,7 +311,7 @@ def legal():
     return render_template('/serviceItems/internet.html', inSession=inSession, internet=items, msg=msg)
 
 @app.route('/painting', methods=['GET', 'POST'])
-def farm():
+def painting():
     msg = ''
     inSession = None
     if 'loggedin' in session:
@@ -325,7 +325,7 @@ def farm():
                            db=DB_NAME,
                            port=3306)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM DB_NAME.PaintingData;")
+    cursor.execute(f"SELECT * FROM {DB_NAME}.PaintingData;")
     results = cursor.fetchall()
 
     items = []
@@ -338,7 +338,7 @@ def farm():
         paint['Cost'] = item[4]
         paint['OperatingHours'] = item[5]
         paint['CompanyName'] = item[6]
-        paint['color'] = item[7]
+        paint['Color'] = item[7]
         items.append(paint)
     conn.close()
     print(items)
@@ -365,7 +365,7 @@ def farm():
                                    port=3306)
             cursor = conn.cursor()
 
-            statement = "INSERT INTO DB_NAME.PaintingData (creation_time, location, phone_num, cost, operating_hours, company_name, color) VALUES (" +\
+            statement = f"INSERT INTO {DB_NAME}.PaintingData (creation_time, location, phone_num, cost, operating_hours, company_name, color) VALUES (" +\
                         "'"+str(timestamp)+"', '" +\
                         location+"', '" +\
                         phoneNum+"', '" +\
