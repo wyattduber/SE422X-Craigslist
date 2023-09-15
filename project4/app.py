@@ -125,4 +125,5 @@ def community():
 
 if __name__ == "__main__":
     app.debug = True
+    app.port = 10000
     app.run()
